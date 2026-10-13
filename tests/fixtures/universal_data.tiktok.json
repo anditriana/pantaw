@@ -1,0 +1,35 @@
+{
+ "__DEFAULT_SCOPE__": {
+  "webapp.user-detail": {
+   "statusCode": 0,
+   "userInfo": {
+    "user": {
+     "id": "107955",
+     "uniqueId": "tiktok",
+     "nickname": "TikTok",
+     "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM",
+     "verified": true
+    },
+    "stats": {
+     "followerCount": 96200000,
+     "followingCount": 1,
+     "heart": 465500000,
+     "heartCount": 465500000,
+     "videoCount": 1514,
+     "diggCount": 0,
+     "friendCount": 1
+    },
+    "statsV2": {
+     "followerCount": "96199454",
+     "followingCount": "1",
+     "heart": "465471428",
+     "heartCount": "465471428",
+     "videoCount": "1514",
+     "diggCount": "0",
+     "friendCount": "1"
+    },
+    "itemList": []
+   }
+  }
+ }
+}

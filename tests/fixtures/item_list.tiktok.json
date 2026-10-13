@@ -1,0 +1,679 @@
+{
+ "cursor": "1787930211535",
+ "hasMore": true,
+ "statusCode": 0,
+ "itemList": [
+  {
+   "id": "7694797676306615583",
+   "createTime": 1791584711,
+   "desc": "this summer gave us pop songs, glam routines, and a few main",
+   "stats": {
+    "collectCount": 308,
+    "commentCount": 1197,
+    "diggCount": 3473,
+    "playCount": 550300,
+    "shareCount": 225
+   },
+   "statsV2": {
+    "collectCount": "308",
+    "commentCount": "1197",
+    "diggCount": "3473",
+    "playCount": "550300",
+    "repostCount": "0",
+    "shareCount": "225"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7694307066965396766",
+   "createTime": 1791470488,
+   "desc": "@Adam Barrera captures what made this summer feel straight o",
+   "stats": {
+    "collectCount": 303,
+    "commentCount": 902,
+    "diggCount": 3887,
+    "playCount": 204500,
+    "shareCount": 255
+   },
+   "statsV2": {
+    "collectCount": "303",
+    "commentCount": "902",
+    "diggCount": "3887",
+    "playCount": "204500",
+    "repostCount": "0",
+    "shareCount": "255"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7693184538704416031",
+   "createTime": 1791209149,
+   "desc": "Real conversations happen on TikTok, and protecting the inte",
+   "stats": {
+    "collectCount": 991,
+    "commentCount": 2652,
+    "diggCount": 9293,
+    "playCount": 330800,
+    "shareCount": 998
+   },
+   "statsV2": {
+    "collectCount": "991",
+    "commentCount": "2652",
+    "diggCount": "9293",
+    "playCount": "330800",
+    "repostCount": "0",
+    "shareCount": "998"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7692114317151423775",
+   "createTime": 1790959957,
+   "desc": "ATEEZ on the FYF. BTS on tour. dance challenges on repeat. @",
+   "stats": {
+    "collectCount": 757,
+    "commentCount": 2637,
+    "diggCount": 8049,
+    "playCount": 365900,
+    "shareCount": 691
+   },
+   "statsV2": {
+    "collectCount": "757",
+    "commentCount": "2637",
+    "diggCount": "8049",
+    "playCount": "365900",
+    "repostCount": "0",
+    "shareCount": "691"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7691450773619625247",
+   "createTime": 1790805450,
+   "desc": "if your FYF had you hitting the Zara Larsson, you'll know Po",
+   "stats": {
+    "collectCount": 721,
+    "commentCount": 1457,
+    "diggCount": 7737,
+    "playCount": 282000,
+    "shareCount": 579
+   },
+   "statsV2": {
+    "collectCount": "721",
+    "commentCount": "1457",
+    "diggCount": "7737",
+    "playCount": "282000",
+    "repostCount": "0",
+    "shareCount": "579"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7691013160425327903",
+   "createTime": 1790703573,
+   "desc": "K-pop fans have been BUSY. @rachelszero shares how your fan ",
+   "stats": {
+    "collectCount": 647,
+    "commentCount": 1102,
+    "diggCount": 6679,
+    "playCount": 217900,
+    "shareCount": 426
+   },
+   "statsV2": {
+    "collectCount": "647",
+    "commentCount": "1102",
+    "diggCount": "6679",
+    "playCount": "217900",
+    "repostCount": "0",
+    "shareCount": "426"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7689568478570843422",
+   "createTime": 1790367199,
+   "desc": "the throwback sounds we didn\u2019t know we were missing, given n",
+   "stats": {
+    "collectCount": 723,
+    "commentCount": 2063,
+    "diggCount": 8693,
+    "playCount": 411100,
+    "shareCount": 607
+   },
+   "statsV2": {
+    "collectCount": "723",
+    "commentCount": "2063",
+    "diggCount": "8693",
+    "playCount": "411100",
+    "repostCount": "0",
+    "shareCount": "607"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7688834577418194206",
+   "createTime": 1790196319,
+   "desc": "this group chat deserves a soundtrack \ud83c\udfa4 TikTok x #TheVoice, ",
+   "stats": {
+    "collectCount": 949,
+    "commentCount": 1670,
+    "diggCount": 15000,
+    "playCount": 620700,
+    "shareCount": 619
+   },
+   "statsV2": {
+    "collectCount": "949",
+    "commentCount": "1670",
+    "diggCount": "15000",
+    "playCount": "620700",
+    "repostCount": "0",
+    "shareCount": "619"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7686945827008433439",
+   "createTime": 1789756556,
+   "desc": "trying something new can start with your DMs \u2014 @Dine with Ke",
+   "stats": {
+    "collectCount": 981,
+    "commentCount": 2617,
+    "diggCount": 11400,
+    "playCount": 470100,
+    "shareCount": 749
+   },
+   "statsV2": {
+    "collectCount": "981",
+    "commentCount": "2617",
+    "diggCount": "11400",
+    "playCount": "470100",
+    "repostCount": "0",
+    "shareCount": "749"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7683195368279985438",
+   "createTime": 1788883336,
+   "desc": "hear how @Palina La Diva \ud83c\udf10 spinning tracks on LIVE brings te",
+   "stats": {
+    "collectCount": 1270,
+    "commentCount": 3457,
+    "diggCount": 12200,
+    "playCount": 660500,
+    "shareCount": 1034
+   },
+   "statsV2": {
+    "collectCount": "1270",
+    "commentCount": "3457",
+    "diggCount": "12200",
+    "playCount": "660500",
+    "repostCount": "0",
+    "shareCount": "1034"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7681695065927912735",
+   "createTime": 1788534031,
+   "desc": "@Alex Warren thinks he'll never write anything better than..",
+   "stats": {
+    "collectCount": 1594,
+    "commentCount": 2496,
+    "diggCount": 16600,
+    "playCount": 473900,
+    "shareCount": 1112
+   },
+   "statsV2": {
+    "collectCount": "1594",
+    "commentCount": "2496",
+    "diggCount": "16600",
+    "playCount": "473900",
+    "repostCount": "0",
+    "shareCount": "1112"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7681414892942839071",
+   "createTime": 1788468783,
+   "desc": "when words aren't enough, Photo Comments say more @mama | ou",
+   "stats": {
+    "collectCount": 966,
+    "commentCount": 1222,
+    "diggCount": 10400,
+    "playCount": 223200,
+    "shareCount": 621
+   },
+   "statsV2": {
+    "collectCount": "966",
+    "commentCount": "1222",
+    "diggCount": "10400",
+    "playCount": "223200",
+    "repostCount": "0",
+    "shareCount": "621"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7681309378095353118",
+   "createTime": 1788444219,
+   "desc": "You showed us what it means to be a Pop Girl this summer \ud83c\udfb6 #",
+   "stats": {
+    "collectCount": 1397,
+    "commentCount": 1532,
+    "diggCount": 13600,
+    "playCount": 324900,
+    "shareCount": 1485
+   },
+   "statsV2": {
+    "collectCount": "1397",
+    "commentCount": "1532",
+    "diggCount": "13600",
+    "playCount": "324900",
+    "repostCount": "0",
+    "shareCount": "1485"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7680996287877008670",
+   "createTime": 1788371338,
+   "desc": "You made this the summer of K-Pop on TikTok \ud83e\udef0 #SongsofTheSum",
+   "stats": {
+    "collectCount": 7716,
+    "commentCount": 4101,
+    "diggCount": 63100,
+    "playCount": 577400,
+    "shareCount": 4603
+   },
+   "statsV2": {
+    "collectCount": "7716",
+    "commentCount": "4101",
+    "diggCount": "63100",
+    "playCount": "577400",
+    "repostCount": "0",
+    "shareCount": "4603"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7680721699171601694",
+   "createTime": 1788307388,
+   "desc": "this summer was all about the classic hits. here's to the on",
+   "stats": {
+    "collectCount": 2740,
+    "commentCount": 5618,
+    "diggCount": 21900,
+    "playCount": 472700,
+    "shareCount": 2314
+   },
+   "statsV2": {
+    "collectCount": "2740",
+    "commentCount": "5618",
+    "diggCount": "21900",
+    "playCount": "472700",
+    "repostCount": "0",
+    "shareCount": "2314"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  },
+  {
+   "id": "7679101730352565535",
+   "createTime": 1787930211,
+   "desc": "what started on TikTok grew into a special IRL connection on",
+   "stats": {
+    "collectCount": 1350,
+    "commentCount": 2487,
+    "diggCount": 13600,
+    "playCount": 500400,
+    "shareCount": 1109
+   },
+   "statsV2": {
+    "collectCount": "1350",
+    "commentCount": "2487",
+    "diggCount": "13600",
+    "playCount": "500400",
+    "repostCount": "0",
+    "shareCount": "1109"
+   },
+   "author": {
+    "uniqueId": "tiktok",
+    "secUid": "MS4wLjABAAAAv7iSuuXDJGDvJkmH_vz1qkDZYo1apxgzaxdBSeIuPiM"
+   },
+   "authorStats": {
+    "diggCount": 4379,
+    "followerCount": 96200000,
+    "followingCount": 1,
+    "friendCount": 0,
+    "heart": 465500000,
+    "heartCount": 465500000,
+    "videoCount": 1514
+   },
+   "authorStatsV2": {
+    "diggCount": "4379",
+    "followerCount": "96200000",
+    "followingCount": "1",
+    "friendCount": "0",
+    "heart": "465500000",
+    "heartCount": "465500000",
+    "videoCount": "1514"
+   }
+  }
+ ]
+}
