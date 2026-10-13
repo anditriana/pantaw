@@ -95,7 +95,7 @@ function render() {
     body = `<p class="muted">Menunggu data video… Bila tidak muncul, scroll daftar video sedikit atau muat ulang halaman.</p>`;
   } else {
     body =
-      `<div class="er">${row('ER (followers)', formatPercent(m.erFollowers))}${row('ER (views)', formatPercent(m.erViews))}</div>` +
+      `<div class="er">${row('ER (followers)', formatPercent(m.erFollowers))}${row('ER views (total)', formatPercent(m.erViews))}${row('ER views (rata-rata/video)', formatPercent(m.erViewsAvg))}</div>` +
       row('Followers', formatCount(m.followers)) +
       row('Rata-rata views', formatCount(m.avgViews)) +
       row('Rata-rata likes', formatCount(m.avgLikes)) +

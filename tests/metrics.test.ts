@@ -35,13 +35,25 @@ describe('computeMetrics', () => {
     expect(m.avgShares).toBe(5);
     expect(m.erFollowers).toBeCloseTo(7.5); // (60 + 15) / 1000 × 100
     expect(m.erViews).toBeCloseTo(4); // (120 + 30 + 10) / 4000 × 100
+    expect(m.erViewsAvg).toBeCloseTo((11 + 50 / 30) / 2); // rata-rata 110/1000 dan 50/3000 (× 100)
   });
 
   it('followers 0 / views 0 → ER null, tanpa video → null', () => {
     const m = computeMetrics(0, [v('1', 1)])!;
     expect(m.erFollowers).toBeNull();
     expect(m.erViews).toBeNull();
+    expect(m.erViewsAvg).toBeNull();
     expect(computeMetrics(100, [])).toBeNull();
+  });
+
+  it('ER views rata-rata melewati video dengan views 0', () => {
+    const m = computeMetrics(1000, [
+      v('1', 1, { views: 1000, likes: 40, comments: 10, shares: 0 }), // 5%
+      v('2', 2, { views: 0, likes: 30, comments: 5, shares: 1 }), // dilewati
+      v('3', 3, { views: 500, likes: 5, comments: 0, shares: 0 }), // 1%
+    ])!;
+    expect(m.erViewsAvg).toBeCloseTo(3);
+    expect(m.erViews).toBeCloseTo((91 / 1500) * 100); // total tetap memakai semua video
   });
 
   it('fixture asli @tiktok: 12 video terbaru dari 16', () => {
@@ -52,5 +64,6 @@ describe('computeMetrics', () => {
     expect(m.avgLikes).toBeCloseTo(113411 / 12);
     expect(m.erFollowers).toBeCloseTo(((113411 + 23472) / 12 / 96199454) * 100, 10);
     expect(m.erViews).toBeCloseTo(((113411 + 23472 + 7916) / 4810900) * 100, 10);
+    expect(m.erViewsAvg).toBeCloseTo(3.21474160930007, 10); // dihitung terpisah dari fixture
   });
 });
