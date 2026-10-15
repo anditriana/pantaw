@@ -45,4 +45,13 @@ npm run typecheck
 - [ ] Budget → CPM: input harga per post → CPM per 1.000 views & per 1.000 engagement; nilai diingat antar profil
 - [x] Salin baris metrik (profil & per video) ke clipboard, format siap tempel ke spreadsheet — profil saja (keputusan user 2026-10-15): tombol **Salin data** = 1 baris TSV tanpa header (supaya banyak KOL bisa ditempel berurutan) + tombol **Salin judul kolom** untuk baris 1; 13 kolom, angka bulat tanpa pemisah ribuan, ER desimal koma (4,21) tanpa `%`, ER null = sel kosong; format di `src/lib/sheet.ts` (tes `tests/sheet.test.ts`), tombol di `src/content.ts` via `navigator.clipboard` (tanpa permission baru). Per video belum. Dicek user di Chrome 2026-10-15.
 - [x] Pengaturan kolom (urutan + tampil/sembunyi) untuk kartu dan hasil salin — tombol ⚙ di kartu, ↑ ↓ + centang per kolom, "Kembalikan default"; satu `ColumnConfig` dipakai kartu, **Salin data**, dan **Salin judul kolom** (registri di `src/lib/columns.ts`, tes `tests/columns.test.ts`); disimpan di `chrome.storage.local` key `columns`, sinkron antar tab via `onChanged`; permission `storage` ditambahkan (satu-satunya, disetujui user 2026-10-15). Username/Nama/Jumlah video/Tanggal/Link hanya di hasil salin
-- [ ] Privacy policy + aset & listing Chrome Web Store
+- [ ] Privacy policy + aset & listing Chrome Web Store — rincian (dicatat 2026-10-15):
+    - [ ] Ikon PNG 16/32/48/128 + `icons` di `manifest.json` (SVG tidak boleh)
+    - [ ] `npm run zip`: build lalu zip **isi** `dist/` (manifest di akar zip), tolak kalau `version` tidak naik dari rilis terakhir
+    - [ ] Teks privacy policy (semua hitungan lokal, tanpa server, tidak mengumpulkan data) + URL publik untuk menampungnya
+    - [ ] Draft listing: deskripsi, kategori, screenshot 1280×800, promo tile kecil 440×280
+    - [ ] Isian tab Privacy: single purpose, justifikasi `storage` (pengaturan kolom) dan host `tiktok.com` (baca data yang sudah dimuat halaman), remote code = tidak ada, data usage = tidak dikumpulkan
+    - [ ] Nama: pertimbangkan "KOL ER Checker for TikTok" (merek di judul rawan ditolak review)
+    - [ ] (user) Daftar Developer Dashboard (sekali bayar ±USD 5), upload, submit — mulai **Unlisted** untuk tes
+    - Alur update: naikkan `version` → build → zip → Package → Upload new package → submit review; Chrome pemakai update otomatis. Permission baru yang memunculkan peringatan menonaktifkan extension sampai pemakai menyetujui (`storage` tidak). Tidak ada rollback: rilis ulang versi lama dengan nomor lebih tinggi.
+- [ ] Remote git: repo belum punya `origin`; buat repo GitHub (private) lalu push `main`
