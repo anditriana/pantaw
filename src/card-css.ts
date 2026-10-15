@@ -26,6 +26,7 @@ export const CARD_CSS = `
 .cols { max-height: 320px; overflow-y: auto; }
 .col { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
 .col label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+.intro { margin: 0 0 6px; }
 .col input { margin: 0; cursor: pointer; }
 .col button { all: unset; cursor: pointer; width: 20px; text-align: center; border-radius: 4px; background: rgba(22,24,35,.08); }
 .col button[disabled] { opacity: .3; cursor: default; }

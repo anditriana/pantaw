@@ -171,6 +171,9 @@ function render() {
   let body: string;
   if (settingsOpen) {
     body =
+      `<p class="muted intro">Atur kolom yang tampil di kartu dan di hasil Salin data / Salin judul kolom. ` +
+      `Centang = tampil, kosongkan = sembunyi; ↑ ↓ = ubah urutan; Kembalikan default = reset. ` +
+      `Tersimpan di browser ini, berlaku di semua tab.</p>` +
       `<div class="cols">${config
         .map((c, i) => {
           const def = COLUMN_BY_ID.get(c.id)!;
