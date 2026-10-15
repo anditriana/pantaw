@@ -19,4 +19,8 @@ export const CARD_CSS = `
 .er { background: #fff0f3; border-radius: 6px; padding: 4px 6px; margin-bottom: 6px; }
 .er b { color: #fe2c55; font-size: 14px; }
 .muted { margin: 6px 0 0; color: rgba(22,24,35,.55); font-size: 11px; }
+.actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.actions button { all: unset; cursor: pointer; font-size: 12px; }
+.actions .copy { background: #fe2c55; color: #fff; border-radius: 6px; padding: 4px 12px; font-weight: 600; }
+.actions .link { color: rgba(22,24,35,.65); text-decoration: underline; font-size: 11px; }
 `;

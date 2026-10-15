@@ -5,6 +5,7 @@ import { SOURCE_CONTENT, SOURCE_MAIN, type ApiMessage } from './lib/messages';
 import { SAMPLE_SIZE, computeMetrics, selectRecentVideos } from './lib/metrics';
 import { parseItemList, parseUniversalData, parseUserDetail, type Profile, type Video } from './lib/parse';
 import { profileFromPath } from './lib/route';
+import { sheetHeader, sheetRow } from './lib/sheet';
 import { CARD_CSS } from './card-css';
 
 const key = (uniqueId: string) => uniqueId.toLowerCase();
@@ -55,6 +56,36 @@ let host: HTMLDivElement | null = null;
 let root: ShadowRoot;
 let collapsed = false;
 let dismissedFor: string | null = null;
+let copyFeedback: { action: string; ok: boolean } | null = null; // umpan balik tombol salin
+let copyTimer: ReturnType<typeof setTimeout> | undefined;
+
+function currentData() {
+  const uid = profileFromPath(location.pathname);
+  if (!uid) return { uid, profile: undefined, m: null };
+  const k = key(uid);
+  const profile = profiles.get(k) ?? fallbackProfiles.get(k);
+  const sample = selectRecentVideos([...(videos.get(k)?.values() ?? [])]);
+  const m = profile ? computeMetrics(profile.followers, sample) : null;
+  return { uid, profile, m };
+}
+
+async function copyAction(action: string) {
+  const { profile, m } = currentData();
+  if (!profile || !m) return;
+  let ok = true;
+  try {
+    await navigator.clipboard.writeText(action === 'copy-row' ? sheetRow(profile, m, new Date()) : sheetHeader());
+  } catch {
+    ok = false;
+  }
+  copyFeedback = { action, ok };
+  clearTimeout(copyTimer);
+  copyTimer = setTimeout(() => {
+    copyFeedback = null;
+    render();
+  }, 1500);
+  render();
+}
 
 function ensureHost(): ShadowRoot {
   if (!host) {
@@ -65,6 +96,7 @@ function ensureHost(): ShadowRoot {
       const action = (e.target as HTMLElement).closest('[data-action]')?.getAttribute('data-action');
       if (action === 'toggle') collapsed = !collapsed;
       if (action === 'close') dismissedFor = profileFromPath(location.pathname);
+      if (action === 'copy-row' || action === 'copy-header') void copyAction(action);
       render();
     });
   }
@@ -84,11 +116,10 @@ function render() {
   const uid = profileFromPath(location.pathname);
   if (!uid || dismissedFor === uid) return removeHost();
 
-  const k = key(uid);
-  const profile = profiles.get(k) ?? fallbackProfiles.get(k);
-  const sample = selectRecentVideos([...(videos.get(k)?.values() ?? [])]);
-  const m = profile ? computeMetrics(profile.followers, sample) : null;
+  const { m } = currentData();
 
+  const label = (action: string, text: string) =>
+    copyFeedback?.action === action ? (copyFeedback.ok ? 'Tersalin ✓' : 'Gagal menyalin') : text;
   const row = (label: string, value: string) => `<div class="row"><span>${label}</span><b>${value}</b></div>`;
   let body: string;
   if (!m) {
@@ -101,7 +132,9 @@ function render() {
       row('Rata-rata likes', formatCount(m.avgLikes)) +
       row('Rata-rata komentar', formatCount(m.avgComments)) +
       row('Rata-rata share', formatCount(m.avgShares)) +
-      `<p class="muted">${m.sampleSize} video terakhir${m.sampleSize < SAMPLE_SIZE ? ` (kurang dari ${SAMPLE_SIZE})` : ''}, pinned dikecualikan.</p>`;
+      `<p class="muted">${m.sampleSize} video terakhir${m.sampleSize < SAMPLE_SIZE ? ` (kurang dari ${SAMPLE_SIZE})` : ''}, pinned dikecualikan.</p>` +
+      `<div class="actions"><button class="copy" data-action="copy-row">${label('copy-row', 'Salin')}</button>` +
+      `<button class="link" data-action="copy-header">${label('copy-header', 'Salin judul kolom')}</button></div>`;
   }
 
   ensureHost().innerHTML =
