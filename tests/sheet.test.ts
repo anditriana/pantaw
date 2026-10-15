@@ -3,6 +3,7 @@ import itemList from './fixtures/item_list.tiktok.json';
 import universal from './fixtures/universal_data.tiktok.json';
 import { computeMetrics, selectRecentVideos, type Metrics } from '../src/lib/metrics';
 import { parseItemList, parseUniversalData } from '../src/lib/parse';
+import { moveColumn, toggleColumn, DEFAULT_CONFIG } from '../src/lib/columns';
 import { SHEET_COLUMNS, sheetHeader, sheetRow } from '../src/lib/sheet';
 
 const profile = { uniqueId: 'budi', nickname: 'Budi', followers: 1234567 };
@@ -48,6 +49,26 @@ describe('sheetHeader / sheetRow', () => {
     expect(c[10]).toBe('12');
     expect(c[11]).toBe('2026-10-05');
     expect(c[12]).toBe('https://www.tiktok.com/@budi');
+  });
+
+  it('config kustom: urutan & kolom aktif dipakai header dan baris', () => {
+    let cfg = moveColumn(DEFAULT_CONFIG, 'link', -1); // link sebelum tanggal
+    cfg = moveColumn(cfg, 'erViews', -1);
+    for (const id of ['nama', 'avgLikes', 'jumlahVideo']) cfg = toggleColumn(cfg, id);
+    const h = cells(sheetHeader(cfg));
+    const r = cells(sheetRow(profile, metrics(), date, cfg));
+    expect(h).toHaveLength(10);
+    expect(r).toHaveLength(10);
+    expect(h.slice(0, 3)).toEqual(['Username', 'Followers', 'Rata-rata views']);
+    expect(r.slice(0, 3)).toEqual(['@budi', '1234567', '1000']);
+    expect(h.slice(-3)).toEqual(['ER views rata-rata (%)', 'Link profil', 'Tanggal']);
+    expect(r.slice(-3)).toEqual(['0,01', 'https://www.tiktok.com/@budi', '2026-10-05']);
+  });
+
+  it('semua kolom nonaktif → string kosong', () => {
+    const cfg = DEFAULT_CONFIG.map((c) => ({ ...c, enabled: false }));
+    expect(sheetHeader(cfg)).toBe('');
+    expect(sheetRow(profile, metrics(), date, cfg)).toBe('');
   });
 
   it('fixture asli @tiktok', () => {

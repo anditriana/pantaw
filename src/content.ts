@@ -1,6 +1,6 @@
 // Content script (isolated world). Mengumpulkan data dari JSON hidrasi + respons yang
 // diteruskan main-world.ts, lalu menampilkan kartu ER di halaman profil.
-import { formatCount, formatPercent } from './lib/format';
+import { COLUMN_BY_ID, moveColumn, normalizeConfig, toggleColumn, type ColumnConfig } from './lib/columns';
 import { SOURCE_CONTENT, SOURCE_MAIN, type ApiMessage } from './lib/messages';
 import { SAMPLE_SIZE, computeMetrics, selectRecentVideos } from './lib/metrics';
 import { parseItemList, parseUniversalData, parseUserDetail, type Profile, type Video } from './lib/parse';
@@ -58,6 +58,39 @@ let collapsed = false;
 let dismissedFor: string | null = null;
 let copyFeedback: { action: string; ok: boolean } | null = null; // umpan balik tombol salin
 let copyTimer: ReturnType<typeof setTimeout> | undefined;
+let settingsOpen = false;
+
+// Pengaturan kolom (urutan + tampil) — dipakai kartu DAN baris salin; disimpan di chrome.storage.local.
+const STORAGE_KEY = 'columns';
+let config: ColumnConfig = normalizeConfig(null);
+
+async function loadConfig() {
+  try {
+    config = normalizeConfig((await chrome.storage.local.get(STORAGE_KEY))[STORAGE_KEY]);
+  } catch {
+    config = normalizeConfig(null);
+  }
+  render();
+}
+
+function changeConfig(next: ColumnConfig) {
+  config = next;
+  try {
+    void chrome.storage.local.set({ [STORAGE_KEY]: config }).catch(() => {});
+  } catch {
+    // gagal simpan → tetap berlaku di tab ini
+  }
+}
+
+try {
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area !== 'local' || !changes[STORAGE_KEY]) return;
+    config = normalizeConfig(changes[STORAGE_KEY].newValue);
+    render();
+  });
+} catch {
+  // storage tidak tersedia → pakai default
+}
 
 function currentData() {
   const uid = profileFromPath(location.pathname);
@@ -71,10 +104,12 @@ function currentData() {
 
 async function copyAction(action: string) {
   const { profile, m } = currentData();
-  if (!profile || !m) return;
+  if (!profile || !m || !config.some((c) => c.enabled)) return;
   let ok = true;
   try {
-    await navigator.clipboard.writeText(action === 'copy-row' ? sheetRow(profile, m, new Date()) : sheetHeader());
+    await navigator.clipboard.writeText(
+      action === 'copy-row' ? sheetRow(profile, m, new Date(), config) : sheetHeader(config),
+    );
   } catch {
     ok = false;
   }
@@ -94,8 +129,17 @@ function ensureHost(): ShadowRoot {
     root = host.attachShadow({ mode: 'open' });
     root.addEventListener('click', (e) => {
       const action = (e.target as HTMLElement).closest('[data-action]')?.getAttribute('data-action');
+      // Klik tanpa aksi (mis. teks <label>) jangan render: innerHTML yang diganti memutus label dari checkbox-nya.
+      if (!action) return;
       if (action === 'toggle') collapsed = !collapsed;
       if (action === 'close') dismissedFor = profileFromPath(location.pathname);
+      const id = (e.target as HTMLElement).closest('[data-id]')?.getAttribute('data-id') ?? '';
+      if (action === 'settings') settingsOpen = !settingsOpen;
+      if (action === 'settings-done') settingsOpen = false;
+      if (action === 'settings-reset') changeConfig(normalizeConfig(null));
+      if (action === 'col-toggle') changeConfig(toggleColumn(config, id));
+      if (action === 'col-up') changeConfig(moveColumn(config, id, -1));
+      if (action === 'col-down') changeConfig(moveColumn(config, id, 1));
       if (action === 'copy-row' || action === 'copy-header') void copyAction(action);
       render();
     });
@@ -120,27 +164,45 @@ function render() {
 
   const label = (action: string, text: string) =>
     copyFeedback?.action === action ? (copyFeedback.ok ? 'Tersalin ✓' : 'Gagal menyalin') : text;
-  const row = (label: string, value: string) => `<div class="row"><span>${label}</span><b>${value}</b></div>`;
+  const row = (label: string, value: string, er?: boolean) =>
+    `<div class="row${er ? ' er' : ''}"><span>${label}</span><b>${value}</b></div>`;
+  const none = !config.some((c) => c.enabled);
+  const copyLabel = (action: string, text: string) => (none ? 'Pilih kolom dulu' : label(action, text));
   let body: string;
-  if (!m) {
+  if (settingsOpen) {
+    body =
+      `<div class="cols">${config
+        .map((c, i) => {
+          const def = COLUMN_BY_ID.get(c.id)!;
+          return (
+            `<div class="col" data-id="${c.id}"><input type="checkbox" id="c-${c.id}" data-action="col-toggle"${c.enabled ? ' checked' : ''}>` +
+            `<label for="c-${c.id}">${def.label}</label>` +
+            `<button data-action="col-up" title="Naik"${i === 0 ? ' disabled' : ''}>↑</button>` +
+            `<button data-action="col-down" title="Turun"${i === config.length - 1 ? ' disabled' : ''}>↓</button></div>`
+          );
+        })
+        .join('')}</div>` +
+      `<div class="actions"><button class="copy" data-action="settings-done">Selesai</button>` +
+      `<button class="link" data-action="settings-reset">Kembalikan default</button></div>`;
+  } else if (!m) {
     body = `<p class="muted">Menunggu data video… Bila tidak muncul, scroll daftar video sedikit atau muat ulang halaman.</p>`;
   } else {
     body =
-      `<div class="er">${row('ER (followers)', formatPercent(m.erFollowers))}${row('ER views (total)', formatPercent(m.erViews))}${row('ER views (rata-rata/video)', formatPercent(m.erViewsAvg))}</div>` +
-      row('Followers', formatCount(m.followers)) +
-      row('Rata-rata views', formatCount(m.avgViews)) +
-      row('Rata-rata likes', formatCount(m.avgLikes)) +
-      row('Rata-rata komentar', formatCount(m.avgComments)) +
-      row('Rata-rata share', formatCount(m.avgShares)) +
+      config
+        .map((c) => COLUMN_BY_ID.get(c.id)!)
+        .filter((d) => d.card && config.find((c) => c.id === d.id)!.enabled)
+        .map((d) => row(d.card!.label, d.card!.value(m), d.card!.er))
+        .join('') +
       `<p class="muted">${m.sampleSize} video terakhir${m.sampleSize < SAMPLE_SIZE ? ` (kurang dari ${SAMPLE_SIZE})` : ''}, pinned dikecualikan.</p>` +
-      `<div class="actions"><button class="copy" data-action="copy-row">${label('copy-row', 'Salin')}</button>` +
-      `<button class="link" data-action="copy-header">${label('copy-header', 'Salin judul kolom')}</button></div>`;
+      `<div class="actions"><button class="copy" data-action="copy-row"${none ? ' disabled' : ''}>${copyLabel('copy-row', 'Salin data')}</button>` +
+      `<button class="link" data-action="copy-header"${none ? ' disabled' : ''}>${copyLabel('copy-header', 'Salin judul kolom')}</button></div>`;
   }
 
   ensureHost().innerHTML =
     `<style>${CARD_CSS}</style>` +
     `<div class="card${collapsed ? ' collapsed' : ''}">` +
-    `<div class="head"><button data-action="toggle" title="Ciutkan/buka">KOL · @${esc(uid)}</button>` +
+    `<div class="head"><button class="title" data-action="toggle" title="Ciutkan/buka">KOL · @${esc(uid)}</button>` +
+    `<button data-action="settings" title="Pengaturan kolom">⚙</button>` +
     `<button data-action="close" title="Tutup untuk profil ini">×</button></div>` +
     `<div class="body">${body}</div></div>`;
 }
@@ -155,6 +217,7 @@ function onTick() {
 }
 
 function start() {
+  void loadConfig();
   readHydration();
   onTick();
   setInterval(onTick, 500);

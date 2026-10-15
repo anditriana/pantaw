@@ -7,7 +7,7 @@ Chrome extension MV3 (TypeScript, esbuild, vitest, tanpa framework UI). Detail p
 - `npm test` · `npm run typecheck`
 
 ## Prinsip (wajib)
-- Host permission hanya `https://www.tiktok.com/*`. Jangan tambah `<all_urls>`, permission baru, atau remote code.
+- Host permission hanya `https://www.tiktok.com/*`. Satu-satunya permission tambahan yang boleh: `storage` (disetujui user 2026-10-15, untuk pengaturan kolom, `chrome.storage.local`); tidak ada yang lain. Jangan tambah `<all_urls>`, permission lain, atau remote code.
 - Tanpa server, analytics, telemetri. Semua hitungan lokal.
 - Jangan membuat request jaringan sendiri; pakai data yang sudah dimuat halaman (JSON hidrasi + respons yang
   disadap `src/main-world.ts`).
