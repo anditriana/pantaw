@@ -5,7 +5,7 @@ Referensi produk: justkol.id. MVP: **TikTok saja** (tanpa login). Instagram meny
 
 Prinsip (lihat ide lengkap: `~/work/hub/catatan/kol-extension.md`):
 - Jalan hanya saat user membuka profil; semua hitungan lokal di browser; tanpa server/database terpusat.
-- Panggilan jaringan minimal; host permission hanya `*.tiktok.com`.
+- Panggilan jaringan minimal; host permission hanya `*.tiktok.com`; satu-satunya permission tambahan `storage` (disetujui user 2026-10-15, untuk pengaturan kolom).
 - Tanpa remote code (aturan MV3 / Chrome Web Store).
 - Gratis penuh; versi berbayar (KOL Manager / spreadsheet) belakangan.
 
@@ -43,5 +43,6 @@ npm run typecheck
 - [x] Kartu ER: followers, rata-rata views/likes/komentar/share, ER = (likes+komentar)/followers×100% (tampilkan juga ER per views) — kartu shadow DOM posisi fixed kanan bawah (`src/content.ts`), rumus di `src/lib/metrics.ts`; ER per views ditampilkan dua-duanya (rumus dikonfirmasi user 2026-10-13): `ER views (total)` = Σ(likes+komentar+share)/Σviews dan `ER views (rata-rata/video)` = rata-rata ER views tiap video, video dengan views 0 dilewati; dicoba di profil asli @tiktok
 - [ ] Grafik tren 12 video + pratinjau per video (views, likes, komentar, ER)
 - [ ] Budget → CPM: input harga per post → CPM per 1.000 views & per 1.000 engagement; nilai diingat antar profil
-- [ ] Salin baris metrik (profil & per video) ke clipboard, format siap tempel ke spreadsheet
+- [x] Salin baris metrik (profil & per video) ke clipboard, format siap tempel ke spreadsheet — profil saja (keputusan user 2026-10-15): tombol **Salin data** = 1 baris TSV tanpa header (supaya banyak KOL bisa ditempel berurutan) + tombol **Salin judul kolom** untuk baris 1; 13 kolom, angka bulat tanpa pemisah ribuan, ER desimal koma (4,21) tanpa `%`, ER null = sel kosong; format di `src/lib/sheet.ts` (tes `tests/sheet.test.ts`), tombol di `src/content.ts` via `navigator.clipboard` (tanpa permission baru). Per video belum. Dicek user di Chrome 2026-10-15.
+- [x] Pengaturan kolom (urutan + tampil/sembunyi) untuk kartu dan hasil salin — tombol ⚙ di kartu, ↑ ↓ + centang per kolom, "Kembalikan default"; satu `ColumnConfig` dipakai kartu, **Salin data**, dan **Salin judul kolom** (registri di `src/lib/columns.ts`, tes `tests/columns.test.ts`); disimpan di `chrome.storage.local` key `columns`, sinkron antar tab via `onChanged`; permission `storage` ditambahkan (satu-satunya, disetujui user 2026-10-15). Username/Nama/Jumlah video/Tanggal/Link hanya di hasil salin
 - [ ] Privacy policy + aset & listing Chrome Web Store
