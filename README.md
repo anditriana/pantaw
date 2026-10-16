@@ -1,11 +1,11 @@
-# Pantaw (kol-ext)
+# Pantaw
 
 **Pantaw – KOL ER Checker for TikTok** (merek dipilih user 2026-10-16). Chrome extension (Manifest V3) analitik KOL: cek engagement rate kreator langsung di halaman profil.
 Referensi produk: justkol.id. MVP: **TikTok saja** (tanpa login). Instagram menyusul.
 
-Prinsip (lihat ide lengkap: `~/work/hub/catatan/kol-extension.md`):
+Prinsip:
 - Jalan hanya saat user membuka profil; semua hitungan lokal di browser; tanpa server/database terpusat.
-- Panggilan jaringan minimal; host permission hanya `*.tiktok.com`; satu-satunya permission tambahan `storage` (disetujui user 2026-10-15, untuk pengaturan kolom).
+- Panggilan jaringan minimal; host permission hanya `https://www.tiktok.com/*`; satu-satunya permission tambahan `storage` (disetujui user 2026-10-15, untuk pengaturan kolom).
 - Tanpa remote code (aturan MV3 / Chrome Web Store).
 - Gratis penuh; versi berbayar (KOL Manager / spreadsheet) belakangan.
 
@@ -61,10 +61,11 @@ Ikon: sumber `assets/icon.svg`; PNG 16/32/48/128 dibuat ke `dist/icons/` saat bu
 - [ ] Privacy policy + aset & listing Chrome Web Store — rincian (dicatat 2026-10-15):
     - [x] Ikon PNG 16/32/48/128 + `icons` di `manifest.json` (SVG tidak boleh) — lup + pupil putih di kotak indigo `#4F46E5`; sumber `assets/icon.svg`, PNG digenerate ke `dist/icons/` tiap build oleh `scripts/icons.mjs` (rasterizer mini Node tanpa dependensi, PNG tidak di-commit); manifest tanpa `action`, jadi tidak ada `default_icon`
     - [x] `npm run zip`: build lalu zip **isi** `dist/` (manifest di akar zip), tolak kalau `version` tidak naik dari rilis terakhir — `scripts/zip.mjs` → `release/pantaw-<version>.zip` (`release/` di-.gitignore, pakai program `zip`); "rilis terakhir" = `pantaw-*.zip` dengan version tertinggi di `release/`
-    - [ ] Teks privacy policy (semua hitungan lokal, tanpa server, tidak mengumpulkan data) + URL publik untuk menampungnya
+    - [x] Teks privacy policy (semua hitungan lokal, tanpa server, tidak mengumpulkan data) + URL publik untuk menampungnya
+      - `docs/privacy.html` (ID + ringkasan EN) dan `docs/index.html`, di-host GitHub Pages dari folder `docs/` di `main`. URL yang diharapkan untuk listing: **https://anditriana.github.io/pantaw/privacy.html** (Pages belum diaktifkan — butuh merge + push dulu, lalu Settings → Pages → `main` / `/docs`)
     - [ ] Draft listing: deskripsi, kategori, screenshot 1280×800, promo tile kecil 440×280
     - [ ] Isian tab Privacy: single purpose, justifikasi `storage` (pengaturan kolom) dan host `tiktok.com` (baca data yang sudah dimuat halaman), remote code = tidak ada, data usage = tidak dikumpulkan; sebutkan link **Request fitur** hanya membuka form Google di tab baru atas klik user, tanpa data terkirim otomatis (isian form diproses Google, bukan extension) — cantumkan juga di privacy policy
     - [x] Nama: pertimbangkan "KOL ER Checker for TikTok" (merek di judul rawan ditolak review) — merek **Pantaw** (keputusan user 2026-10-16): `name` "Pantaw – KOL ER Checker for TikTok", `short_name` "Pantaw", `description` bahasa Indonesia (131 karakter, sama dengan bahasa UI & target pengguna); `version` 0.1.0; judul kartu "Pantaw · @user" (format TSV tidak berubah)
     - [ ] (user) Daftar Developer Dashboard (sekali bayar ±USD 5), upload, submit — mulai **Unlisted** untuk tes
     - Alur update: naikkan `version` → build → zip → Package → Upload new package → submit review; Chrome pemakai update otomatis. Permission baru yang memunculkan peringatan menonaktifkan extension sampai pemakai menyetujui (`storage` tidak). Tidak ada rollback: rilis ulang versi lama dengan nomor lebih tinggi.
-- [ ] Remote git: repo belum punya `origin`; buat repo GitHub (private) lalu push `main`
+- [x] Remote git — repo publik https://github.com/anditriana/pantaw (`origin`), `main` ter-push 2026-10-16; riwayat dibersihkan (email author = noreply GitHub)

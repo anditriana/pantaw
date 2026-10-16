@@ -1,4 +1,4 @@
-# kol-ext
+# pantaw
 
 Chrome extension MV3 (TypeScript, esbuild, vitest, tanpa framework UI). Detail produk & backlog: README.md.
 

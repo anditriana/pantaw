@@ -1,6 +1,6 @@
 // Protokol postMessage antara script world MAIN dan content script (isolated world).
-export const SOURCE_MAIN = 'kol-ext:main';
-export const SOURCE_CONTENT = 'kol-ext:content';
+export const SOURCE_MAIN = 'pantaw:main';
+export const SOURCE_CONTENT = 'pantaw:content';
 
 export type ApiKind = 'item_list' | 'user_detail';
 
