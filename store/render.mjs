@@ -21,10 +21,11 @@ function shot(url, out, w, h) {
 
 const frame = (title, sub, body) => `<!doctype html><meta charset="utf-8"><style>
   html,body{margin:0;width:1280px;height:800px;overflow:hidden}
-  body{background:#4F46E5;color:#fff;font-family:'Noto Sans','DejaVu Sans',sans-serif;display:flex;align-items:center;gap:56px;padding:0 64px;box-sizing:border-box}
-  .t{flex:0 0 340px} h1{font-size:44px;line-height:1.15;margin:0 0 16px} p{font-size:22px;line-height:1.45;margin:0;color:#E0E7FF}
+  body{background:radial-gradient(900px 600px at 100% 0%,rgba(254,44,85,.28),transparent 70%),#000;color:#fff;font-family:'Noto Sans','DejaVu Sans',sans-serif;display:flex;align-items:center;gap:56px;padding:0 64px;box-sizing:border-box}
+  .t{flex:0 0 340px} .t::before{content:'';display:block;width:56px;height:6px;border-radius:3px;background:#25F4EE;margin-bottom:24px}
+  h1{font-size:44px;line-height:1.15;margin:0 0 16px} p{font-size:22px;line-height:1.45;margin:0;color:#B4B4BC}
   .m{flex:1;display:flex;justify-content:center;align-items:center;gap:32px}
-  img{display:block;border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.35)}
+  img{display:block;border-radius:12px;box-shadow:0 16px 48px rgba(254,44,85,.25)}
 </style><div class="t"><h1>${title}</h1><p>${sub}</p></div><div class="m">${body}</div>`;
 
 const screens = [

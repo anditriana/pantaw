@@ -213,7 +213,7 @@ Membuat ulang semua PNG: `node store/render.mjs` (dari akar repo; butuh `google-
 
 ### Isi tiap screenshot
 
-Semua: kanvas 1280×800 latar indigo `#4F46E5`, judul + subjudul putih di kiri, **screenshot asli** dari `docs/img/`
+Semua: kanvas 1280×800 latar hitam dengan cahaya merah `#FE2C55` di kanan atas, garis aksen cyan `#25F4EE` + judul putih + subjudul abu di kiri, **screenshot asli** dari `docs/img/`
 di kanan (hanya diperkecil/diperbesar, isi UI tidak diubah). Profil contoh = akun publik resmi `@tiktok`.
 
 1. **"Cek ER kreator di halaman profil"** — *Buka profil TikTok mana saja, kartu Pantaw muncul di pojok kanan bawah.*
@@ -231,8 +231,8 @@ Screenshot 1 memperlihatkan halaman TikTok apa adanya, termasuk logo TikTok di a
 
 ### Small promo tile
 
-`store/promo-small.svg` → `store/promo-small.png` (440×280): latar indigo `#4F46E5`, ikon Pantaw versi putih
-(lup indigo di kotak putih), teks **Pantaw**, tagline "Cek engagement rate KOL / langsung di halaman profil kreator".
+`store/promo-small.svg` → `store/promo-small.png` (440×280): latar hitam + cahaya merah, ikon Pantaw
+(lup merah + aksen cyan di kotak `#121212`), teks **Pantaw** (kata "engagement rate" merah), tagline "Cek engagement rate KOL / langsung di halaman profil kreator".
 Kata "TikTok" sengaja tidak dipakai di tile.
 
 ---

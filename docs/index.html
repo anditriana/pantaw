@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pantaw – Cek engagement rate KOL TikTok langsung di profil</title>
   <meta name="description" content="Extension Chrome gratis untuk cek engagement rate (ER) kreator TikTok langsung di halaman profil. Salin ke spreadsheet satu klik. Dihitung lokal, tanpa server, tanpa login.">
-  <meta name="theme-color" content="#4F46E5">
+  <meta name="theme-color" content="#000000">
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pantaw">
@@ -17,15 +17,17 @@
   <style>
     :root {
       color-scheme: light dark;
-      --brand: #4F46E5; --brand-strong: #4338CA; --on-brand: #ffffff;
-      --fg: #111827; --muted: #4b5563; --bg: #ffffff; --soft: #f5f5ff; --card: #ffffff; --line: #e5e7eb;
-      --accent: #4F46E5;
+      /* Merah #FE2C55 terlalu terang untuk teks putih (3,7:1) → tombol pakai --brand yang sedikit lebih gelap (4,7:1). */
+      --red: #FE2C55; --cyan: #25F4EE;
+      --brand: #E3173F; --brand-strong: #C8102E; --on-brand: #ffffff;
+      --fg: #121212; --muted: #52525b; --bg: #ffffff; --soft: #f6f6f7; --card: #ffffff; --line: #e4e4e7;
+      --accent: #D4113A;
       --radius: 16px; --max: 1080px;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --fg: #f3f4f6; --muted: #a1a1aa; --bg: #0b0d17; --soft: #12142a; --card: #161935; --line: #262a4d;
-        --accent: #a5b4fc;
+        --fg: #f5f5f5; --muted: #a1a1aa; --bg: #000000; --soft: #121212; --card: #161616; --line: #2a2a2a;
+        --accent: #FE2C55;
       }
     }
     * { box-sizing: border-box; }
@@ -39,9 +41,11 @@
     .lead { color: var(--muted); margin: 0 0 32px; max-width: 60ch; }
     section { padding: 64px 0; }
     .alt { background: var(--soft); }
+    /* Header & hero selalu gelap (di mode terang juga) */
+    header.top, .hero { color-scheme: dark; --fg: #f5f5f5; --muted: #b4b4bc; --bg: #000000; --soft: #121212; --card: #161616; --line: #2a2a2a; --accent: #FE2C55; color: var(--fg); }
 
     /* Header */
-    header.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    header.top { position: sticky; top: 0; z-index: 10; background: #000; backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
     header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
     .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; color: var(--fg); text-decoration: none; }
     .brand img { width: 30px; height: 30px; }
@@ -54,28 +58,28 @@
     .btns { display: flex; flex-wrap: wrap; gap: 12px; }
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 12px; font-weight: 600; text-decoration: none; border: 1px solid transparent; transition: transform .15s, background .15s; }
     .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: var(--brand); color: var(--on-brand); box-shadow: 0 8px 24px -8px rgba(79, 70, 229, .6); }
+    .btn-primary { background: var(--brand); color: var(--on-brand); box-shadow: 0 8px 24px -8px rgba(254, 44, 85, .6); }
     .btn-primary:hover { background: var(--brand-strong); }
     .btn-ghost { color: var(--fg); border-color: var(--line); background: var(--card); }
     .btn svg { width: 18px; height: 18px; flex: none; }
     @media (max-width: 480px) { .btns .btn { flex: 1 1 100%; } }
 
     /* Hero */
-    .hero { padding: 56px 0 40px; background: radial-gradient(1200px 500px at 50% -10%, rgba(79, 70, 229, .18), transparent 70%); }
+    .hero { padding: 56px 0 40px; background: radial-gradient(900px 420px at 85% -10%, rgba(254, 44, 85, .22), transparent 70%), radial-gradient(700px 360px at 0% 110%, rgba(37, 244, 238, .08), transparent 70%), #000; }
     .hero .wrap { display: grid; gap: 40px; }
-    .eyebrow { display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--accent); background: var(--soft); border: 1px solid var(--line); padding: 4px 12px; border-radius: 999px; margin-bottom: 16px; }
+    .eyebrow { display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--cyan); background: var(--soft); border: 1px solid var(--line); padding: 4px 12px; border-radius: 999px; margin-bottom: 16px; }
     .hero h1 { font-size: clamp(2rem, 6vw, 3.25rem); margin: 0 0 16px; }
     .hero h1 span { color: var(--accent); }
     .hero p.sub { font-size: 1.125rem; color: var(--muted); margin: 0 0 28px; max-width: 54ch; }
     .trust { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 20px 0 0; padding: 0; list-style: none; font-size: 0.9rem; color: var(--muted); }
-    .trust li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+    .trust li::before { content: "✓ "; color: var(--cyan); font-weight: 700; }
     @media (min-width: 900px) { .hero .wrap { grid-template-columns: 1fr 1.15fr; align-items: center; } .hero { padding: 80px 0 64px; } }
 
     /* Screenshot */
     .shot { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #000; box-shadow: 0 24px 60px -24px rgba(17, 24, 39, .35); }
     .shot img { width: 100%; }
     .stage { display: grid; place-items: center; padding: 28px 20px; border-radius: var(--radius); border: 1px solid var(--line);
-      background: radial-gradient(circle at 50% 0%, rgba(79, 70, 229, .22), transparent 70%), var(--soft); }
+      background: radial-gradient(circle at 50% 0%, rgba(254, 44, 85, .18), transparent 70%), var(--soft); }
     .stage img { border-radius: 14px; box-shadow: 0 18px 40px -18px rgba(17, 24, 39, .55); }
     figure { margin: 0; }
     figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 12px; }
@@ -99,7 +103,7 @@
     @media (min-width: 960px) { .grid.four { grid-template-columns: repeat(4, 1fr); } .grid.three { grid-template-columns: repeat(3, 1fr); } }
     @media (min-width: 640px) and (max-width: 959px) { .grid.four { grid-template-columns: repeat(2, 1fr); } }
     .feat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
-    .feat .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(79, 70, 229, .12); color: var(--accent); margin-bottom: 14px; }
+    .feat .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(254, 44, 85, .12); color: var(--accent); margin-bottom: 14px; }
     .feat .ic svg { width: 22px; height: 22px; }
     .feat h3 { font-size: 1.05rem; margin: 0 0 6px; }
     .feat p { margin: 0; color: var(--muted); font-size: 0.95rem; }
@@ -116,11 +120,11 @@
     ol.steps p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
     /* Privasi */
-    .privacy { display: grid; gap: 28px; align-items: center; background: linear-gradient(135deg, var(--brand), #6D28D9); color: #fff; border-radius: 24px; padding: 36px 28px; }
+    .privacy { display: grid; gap: 28px; align-items: center; background: radial-gradient(600px 300px at 100% 0%, rgba(254, 44, 85, .28), transparent 70%), #121212; color: #fff; border: 1px solid #2a2a2a; border-radius: 24px; padding: 36px 28px; }
     .privacy h2 { color: #fff; }
-    .privacy p { color: rgba(255, 255, 255, .85); margin: 0 0 16px; }
+    .privacy p { color: #c4c4cc; margin: 0 0 16px; }
     .privacy ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-    .privacy li { background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .18); border-radius: 12px; padding: 12px 14px; }
+    .privacy li { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .12); border-left: 3px solid var(--cyan); border-radius: 12px; padding: 12px 14px; }
     .privacy a { color: #fff; font-weight: 600; }
     @media (min-width: 860px) { .privacy { grid-template-columns: 1fr 1fr; padding: 48px; } }
 

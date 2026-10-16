@@ -1,14 +1,22 @@
 <!-- Small promo tile Chrome Web Store 440×280. PNG: node store/render.mjs (Chrome headless). Tanpa logo/merek TikTok. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="440" height="280" viewBox="0 0 440 280">
-  <rect width="440" height="280" fill="#4F46E5"/>
-  <circle cx="400" cy="250" r="120" fill="#5B53EA"/>
+  <defs>
+    <radialGradient id="glow" cx="1" cy="0" r="0.9">
+      <stop offset="0" stop-color="#FE2C55" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FE2C55" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="440" height="280" fill="#000000"/>
+  <rect width="440" height="280" fill="url(#glow)"/>
   <g transform="translate(40 52) scale(0.75)">
-    <rect x="4" y="4" width="120" height="120" rx="26" fill="#FFFFFF"/>
-    <circle cx="56" cy="56" r="28" fill="none" stroke="#4F46E5" stroke-width="14"/>
-    <circle cx="56" cy="56" r="11" fill="#4F46E5"/>
-    <line x1="78" y1="78" x2="100" y2="100" stroke="#4F46E5" stroke-width="16" stroke-linecap="round"/>
+    <rect x="4" y="4" width="120" height="120" rx="26" fill="#121212"/>
+    <circle cx="52" cy="52" r="28" fill="none" stroke="#25F4EE" stroke-width="14"/>
+    <line x1="74" y1="74" x2="96" y2="96" stroke="#25F4EE" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="56" cy="56" r="28" fill="none" stroke="#FE2C55" stroke-width="14"/>
+    <circle cx="56" cy="56" r="11" fill="#FFFFFF"/>
+    <line x1="78" y1="78" x2="100" y2="100" stroke="#FE2C55" stroke-width="16" stroke-linecap="round"/>
   </g>
   <text x="150" y="112" font-family="'Noto Sans', 'DejaVu Sans', sans-serif" font-size="54" font-weight="700" fill="#FFFFFF">Pantaw</text>
-  <text x="40" y="196" font-family="'Noto Sans', 'DejaVu Sans', sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">Cek engagement rate KOL</text>
-  <text x="40" y="228" font-family="'Noto Sans', 'DejaVu Sans', sans-serif" font-size="20" fill="#E0E7FF">langsung di halaman profil kreator</text>
+  <text x="40" y="196" font-family="'Noto Sans', 'DejaVu Sans', sans-serif" font-size="25" font-weight="700" fill="#FFFFFF">Cek <tspan fill="#FE2C55">engagement rate</tspan> KOL</text>
+  <text x="40" y="228" font-family="'Noto Sans', 'DejaVu Sans', sans-serif" font-size="20" fill="#B4B4BC">langsung di halaman profil kreator</text>
 </svg>

@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kebijakan Privasi — Pantaw</title>
   <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <meta name="theme-color" content="#000000">
   <meta name="description" content="Kebijakan privasi Pantaw – KOL ER Checker for TikTok: semua hitungan lokal di browser, tanpa server, tidak mengumpulkan data.">
   <style>
-    :root { color-scheme: light dark; --fg: #1f2937; --muted: #6b7280; --bg: #ffffff; --line: #e5e7eb; --accent: #4f46e5; }
-    @media (prefers-color-scheme: dark) { :root { --fg: #e5e7eb; --muted: #9ca3af; --bg: #111827; --line: #374151; --accent: #a5b4fc; } }
+    :root { color-scheme: light dark; --fg: #121212; --muted: #52525b; --bg: #ffffff; --line: #e5e7eb; --accent: #D4113A; }
+    @media (prefers-color-scheme: dark) { :root { --fg: #f5f5f5; --muted: #a1a1aa; --bg: #000000; --line: #2a2a2a; --accent: #FE2C55; } }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
     main { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
@@ -21,9 +22,29 @@
     .muted { color: var(--muted); }
     section.en { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); }
     footer { margin-top: 40px; font-size: 0.9rem; }
+    /* Header gelap, sama dengan landing (docs/index.html) */
+    header.top { position: sticky; top: 0; z-index: 10; background: #000; backdrop-filter: blur(10px); border-bottom: 1px solid #2a2a2a; color-scheme: dark; }
+    header.top .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; color: #f5f5f5; text-decoration: none; }
+    .brand img { width: 30px; height: 30px; display: block; }
+    nav.links { display: flex; gap: 20px; font-size: 0.95rem; }
+    nav.links a { color: #b4b4bc; text-decoration: none; }
+    nav.links a:hover, nav.links a[aria-current] { color: #f5f5f5; }
+    @media (max-width: 640px) { nav.links .hide-sm { display: none; } }
   </style>
 </head>
 <body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30">Pantaw</a>
+    <nav class="links">
+      <a class="hide-sm" href="./#fitur">Fitur</a>
+      <a class="hide-sm" href="./#cara-pakai">Cara pakai</a>
+      <a href="./#faq">FAQ</a>
+      <a href="privacy.html" aria-current="page">Privasi</a>
+    </nav>
+  </div>
+</header>
 <main>
   <h1>Kebijakan Privasi Pantaw</h1>
   <p class="muted">Pantaw – KOL ER Checker for TikTok (extension Chrome)<br>Berlaku sejak 16 Oktober 2026</p>

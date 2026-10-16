@@ -21,7 +21,7 @@ export const CARD_CSS = `
 .muted { margin: 6px 0 0; color: rgba(22,24,35,.55); font-size: 11px; }
 .actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
 .actions button { all: unset; cursor: pointer; font-size: 12px; }
-.actions .copy { background: #fe2c55; color: #fff; border-radius: 6px; padding: 4px 12px; font-weight: 600; }
+.actions .copy { background: #e3173f; color: #fff; border-radius: 6px; padding: 4px 12px; font-weight: 600; }
 .actions .link { color: rgba(22,24,35,.65); text-decoration: underline; font-size: 11px; }
 .foot { margin-top: 6px; text-align: right; }
 .foot a { color: rgba(22,24,35,.45); font-size: 11px; text-decoration: none; }
