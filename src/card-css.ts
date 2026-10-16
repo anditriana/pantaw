@@ -17,7 +17,7 @@ export const CARD_CSS = `
 .row { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; }
 .row span { color: rgba(22,24,35,.65); }
 .row.er { background: #fff0f3; border-radius: 6px; padding: 2px 6px; }
-.row.er b { color: #fe2c55; font-size: 14px; }
+.row.er b { color: #d4113a; font-size: 14px; }
 .muted { margin: 6px 0 0; color: rgba(22,24,35,.55); font-size: 11px; }
 .actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
 .actions button { all: unset; cursor: pointer; font-size: 12px; }
