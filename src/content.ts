@@ -129,7 +129,7 @@ async function copyAction(action: string) {
 function ensureHost(): ShadowRoot {
   if (!host) {
     host = document.createElement('div');
-    host.id = 'kol-ext-card';
+    host.id = 'pantaw-card';
     root = host.attachShadow({ mode: 'open' });
     root.addEventListener('click', (e) => {
       const action = (e.target as HTMLElement).closest('[data-action]')?.getAttribute('data-action');
