@@ -8,6 +8,10 @@ import { profileFromPath } from './lib/route';
 import { sheetHeader, sheetRow } from './lib/sheet';
 import { CARD_CSS } from './card-css';
 
+// Form Google untuk request fitur; dibuka di tab baru tanpa prefill (tidak ada data yang dikirim ke form).
+const FEATURE_REQUEST_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScbND6vNpF3qs1xwdoRVBqN4rPflwlAMZY8rtbEgm_pzU4eSw/viewform';
+
 const key = (uniqueId: string) => uniqueId.toLowerCase();
 
 const profiles = new Map<string, Profile>(); // dari hidrasi / user/detail (angka presisi)
@@ -198,7 +202,8 @@ function render() {
         .join('') +
       `<p class="muted">${m.sampleSize} video terakhir${m.sampleSize < SAMPLE_SIZE ? ` (kurang dari ${SAMPLE_SIZE})` : ''}, pinned dikecualikan.</p>` +
       `<div class="actions"><button class="copy" data-action="copy-row"${none ? ' disabled' : ''}>${copyLabel('copy-row', 'Salin data')}</button>` +
-      `<button class="link" data-action="copy-header"${none ? ' disabled' : ''}>${copyLabel('copy-header', 'Salin judul kolom')}</button></div>`;
+      `<button class="link" data-action="copy-header"${none ? ' disabled' : ''}>${copyLabel('copy-header', 'Salin judul kolom')}</button></div>` +
+      `<div class="foot"><a href="${FEATURE_REQUEST_URL}" target="_blank" rel="noopener noreferrer">Request fitur</a></div>`;
   }
 
   ensureHost().innerHTML =
