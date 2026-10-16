@@ -206,10 +206,37 @@ clipboard hanya ditulis saat klik, link Request fitur tanpa data, tanpa remote c
 | Screenshot | 1280×800 (atau 640×400), PNG/JPEG, min 1 maks 5 | Ya (min 1) | **3 dibuat** | `store/screenshot-1.png` … `-3.png` |
 | Small promo tile | 440×280 PNG/JPEG | Ya | **Dibuat** | `store/promo-small.png` (sumber `store/promo-small.svg`) |
 | Marquee promo tile | 1400×560 | Tidak | Belum, tidak perlu untuk rilis pertama | — |
-| Video YouTube promo | — | Tidak | Tidak ada | — |
+| Video YouTube promo | 1920×1080, 42 dtk | Tidak | **Ada** — diupload Unlisted | ID https://youtu.be/OPiShxayCyk · EN https://youtu.be/EWtBLgPVNeE (sumber `store/video/`) |
 
 Membuat ulang semua PNG: `node store/render.mjs` (dari akar repo; butuh `google-chrome`, atau set `CHROME=/path/ke/chrome`).
 `scripts/icons.mjs` tidak dipakai karena rasterizer mininya tidak bisa merender teks maupun menggabungkan gambar raster.
+
+### Video promo YouTube
+
+Dua versi, visual sama, teks overlay beda bahasa. Dipasang di field **Promo video** listing masing-masing bahasa:
+
+| Listing | URL YouTube (Unlisted) | File lokal |
+|---|---|---|
+| Indonesian (utama) | https://youtu.be/OPiShxayCyk | `release/video/pantaw-promo-id.mp4` + `-thumb.png` |
+| English (localized) | https://youtu.be/EWtBLgPVNeE | `release/video/pantaw-promo-en.mp4` + `-thumb.png` |
+
+Isi: hook "Cek engagement rate KOL TikTok dalam 1 detik" → profil @tiktok + kartu Pantaw (zoom, sorot ER) →
+Salin data → "Tersalin ✓" → tabel tempel berlabel "Contoh format · angka ilustrasi" → panel ⚙ → privasi (lokal, tanpa
+login/server, tanpa analytics) → penutup "Gratis di Chrome Web Store" + URL landing + "Tidak berafiliasi dengan TikTok".
+Footage = screenshot Chrome asli (`store/video/footage/`), hanya diberi sorotan/riak klik. Versi EN menyebut
+"Interface in Indonesian". Spesifikasi: H.264 High yuv420p BT.709, 30fps; audio = efek UI sintetis saja (AAC 48 kHz
+stereo, puncak -6 dBFS, ±-25,6 LUFS) — **tanpa musik**, musik latar ditambah di YouTube Studio (Audio Library).
+
+Render ulang (dari akar repo; butuh `google-chrome` + `ffmpeg` dengan libx264; tanpa dependensi npm, bukan Remotion):
+
+```
+node store/video/render.mjs id en   # frame per frame via Chrome headless → release/video/*.mp4 (tanpa audio) + thumbnail
+node store/video/sfx.mjs            # sintesis efek suara → release/video/sfx.wav, mux ke kedua mp4 (-c:v copy)
+```
+
+`node store/video/render.mjs id --preview` hanya membuat beberapa frame PNG di `release/video/preview/`. Teks overlay
+ada di objek `T` di `store/video/promo.html`; waktu cue suara di `cues` pada `store/video/sfx.mjs` (ikuti timeline
+`seek()` di `promo.html` bila timing diubah). Setelah render ulang, video YouTube harus diupload ulang (URL berubah).
 
 ### Isi tiap screenshot
 
@@ -263,13 +290,14 @@ If the card shows "Menunggu data video…" (waiting for video data), scroll the 
 - [ ] Load unpacked dari `dist/` sekali lagi, cek kartu muncul di profil publik.
 - [ ] Dashboard → **Add new item** → upload `release/pantaw-0.1.0.zip`.
 - [ ] Store listing (bahasa utama **Indonesian**): deskripsi Indonesia (bagian 1), kategori, bahasa, ikon 128,
-      `store/screenshot-1..3.png`, `store/promo-small.png`, URL. **Save draft.**
+      `store/screenshot-1..3.png`, `store/promo-small.png`, URL, promo video https://youtu.be/OPiShxayCyk. **Save draft.**
 - [ ] Bahasa kedua — English (localized listing; muncul karena paket punya `_locales/en/`):
     1. Di atas form Store listing, buka dropdown bahasa → pilih **English**. Pilihannya hanya `id` dan `en`, sesuai
        folder `_locales/` di zip; nama & summary otomatis dari `_locales/en/messages.json` (tidak bisa diketik).
     2. Tempel **Detailed description — English** (bagian 1) — terpisah dari deskripsi Indonesia, jangan digabung.
     3. Screenshot: pakai 3 file yang sama (`store/screenshot-1..3.png`) — teks judulnya berbahasa Indonesia, sesuai UI
        extension. Promo tile tidak dilokalkan (satu untuk semua bahasa).
+       Promo video English: https://youtu.be/EWtBLgPVNeE.
     4. **Save draft**, kembali ke dropdown → Indonesian, pastikan isian bahasa utama tidak berubah.
 - [ ] Privacy practices: single purpose, justifikasi `storage` + host, remote code = No, data usage (bagian 2), tiga sertifikasi, privacy policy URL.
 - [ ] Test instructions (bagian 4).

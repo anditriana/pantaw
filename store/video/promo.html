@@ -1,0 +1,269 @@
+<!doctype html>
+<!-- Komposisi video promo Pantaw (1920×1080). Dirender per frame oleh store/video/render.mjs lewat
+     window.seek(detik); tidak ada animasi/transition CSS, semua state dihitung dari t supaya deterministik.
+     ?lang=id|en memilih teks overlay; ?thumb=1 menampilkan komposisi thumbnail. Footage = screenshot Chrome asli
+     (footage/), tidak diubah isinya; sorotan & riak klik hanya anotasi di atasnya. -->
+<html lang="id">
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+  body { color: #fff; font-family: 'Noto Sans', 'DejaVu Sans', sans-serif; }
+  .layer { position: absolute; inset: 0; }
+  .bg { background: radial-gradient(1100px 760px at 100% 0%, rgba(254, 44, 85, .30), transparent 70%),
+                    radial-gradient(900px 600px at 0% 100%, rgba(37, 244, 238, .10), transparent 70%), #000; }
+  .center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .logo { width: 200px; height: 200px; display: block; }
+
+  /* Hook */
+  #hook h1 { font-size: 92px; line-height: 1.12; margin: 48px 0 0; max-width: 1500px; font-weight: 800; letter-spacing: -1px; }
+  #hook h1 em { font-style: normal; color: #25F4EE; }
+  .brand { font-size: 44px; font-weight: 700; margin-top: 18px; color: #fff; }
+  .brand span { color: #FE2C55; }
+
+  /* Footage */
+  #shot { left: 560px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 120px); overflow: hidden; }
+  #cam { position: absolute; left: 0; top: 0; width: 1024px; height: 724px; transform-origin: 0 0; }
+  #cam img { position: absolute; inset: 0; width: 1024px; height: 724px; image-rendering: auto; }
+  .mark { position: absolute; box-sizing: border-box; border: 1.4px solid #25F4EE; border-radius: 6px;
+          box-shadow: 0 0 0 2px rgba(37, 244, 238, .25), 0 0 18px rgba(37, 244, 238, .55); }
+  .ripple { position: absolute; border-radius: 50%; border: 2px solid #25F4EE; box-sizing: border-box; }
+
+  /* Caption kiri */
+  .cap { position: absolute; left: 96px; top: 0; bottom: 0; width: 560px; display: flex; flex-direction: column; justify-content: center; }
+  .cap::before { content: ''; display: block; width: 72px; height: 8px; border-radius: 4px; background: #25F4EE; margin-bottom: 30px; }
+  .cap h2 { font-size: 70px; line-height: 1.1; margin: 0 0 26px; font-weight: 800; letter-spacing: -.5px; }
+  .cap p { font-size: 34px; line-height: 1.4; margin: 0; color: #C4C4CC; }
+  .cap .ok { display: inline-block; margin-top: 30px; font-size: 40px; font-weight: 700; color: #fff; background: #E3173F;
+             padding: 10px 28px; border-radius: 14px; }
+
+  /* Spreadsheet contoh */
+  #sheet { background: rgba(0, 0, 0, .86); }
+  #sheet .head { position: absolute; left: 96px; right: 96px; top: 96px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+  #sheet h2 { font-size: 70px; line-height: 1.1; margin: 0 0 14px; font-weight: 800; }
+  #sheet .head p { font-size: 34px; margin: 0; color: #C4C4CC; }
+  .badge { flex: none; font-size: 28px; font-weight: 700; color: #D4113A; background: #fff0f3; border-radius: 999px; padding: 8px 24px; margin-bottom: 6px; }
+  .paper { position: absolute; left: 96px; right: 96px; top: 400px; background: #fff; border-radius: 20px; overflow: hidden;
+           box-shadow: 0 24px 80px rgba(254, 44, 85, .35); }
+  .paper .clip { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); }
+  table { border-collapse: collapse; color: #111; font-size: 25px; white-space: nowrap; }
+  th, td { border: 1px solid #DCDCE2; padding: 14px 18px; text-align: left; }
+  thead th, tbody th { background: #F3F3F6; color: #6B6B76; font-weight: 500; text-align: center; }
+  tbody tr:first-child td { font-weight: 700; }
+  td.n { text-align: right; }
+  td.er { color: #D4113A; font-weight: 700; }
+  tr.paste td { background: #E9FEFD; }
+  td.er.hl { background: #fff0f3; }
+
+  /* Privasi */
+  #priv h2 { font-size: 80px; margin: 0 0 56px; font-weight: 800; }
+  #priv ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; text-align: left; }
+  #priv li { display: flex; align-items: center; gap: 28px; font-size: 48px; font-weight: 600; background: rgba(255, 255, 255, .06);
+             border: 1px solid rgba(255, 255, 255, .14); border-left: 8px solid #25F4EE; border-radius: 20px; padding: 26px 44px 26px 34px; min-width: 900px; }
+  #priv li svg { width: 54px; height: 54px; flex: none; }
+
+  /* Penutup */
+  #end .name { font-size: 104px; font-weight: 800; margin: 30px 0 34px; letter-spacing: -1px; }
+  #end .cta { font-size: 54px; font-weight: 700; background: #E3173F; padding: 18px 48px; border-radius: 22px; }
+  #end .url { font-size: 44px; margin-top: 40px; color: #25F4EE; font-weight: 600; }
+  #end .fine { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; font-size: 26px; color: #9A9AA4; }
+
+  /* Thumbnail (digambar 1920×1080, di-capture dengan skala 2/3 → 1280×720) */
+  #thumb .t { position: absolute; left: 96px; top: 0; bottom: 0; width: 920px; display: flex; flex-direction: column; justify-content: center; }
+  #thumb .t img { width: 150px; height: 150px; margin-bottom: 40px; }
+  #thumb h1 { font-size: 104px; line-height: 1.06; margin: 0; font-weight: 800; letter-spacing: -1.5px; }
+  #thumb h1 em { font-style: normal; color: #25F4EE; }
+  #thumb .crop { position: absolute; left: 1080px; top: 90px; width: 744px; height: 900px; overflow: hidden; border-radius: 28px;
+                 box-shadow: 0 0 0 4px #FE2C55, 0 30px 90px rgba(254, 44, 85, .45); }
+  #thumb .crop .in { position: absolute; left: 0; top: 0; width: 1024px; height: 724px; transform-origin: 0 0; }
+  #thumb .crop img { position: absolute; inset: 0; width: 1024px; height: 724px; }
+</style>
+
+<div class="layer bg"></div>
+
+<div id="hook" class="layer center">
+  <img class="logo" src="../../assets/icon.svg" alt="">
+  <h1 data-t="hook"></h1>
+  <div class="brand">Pant<span>aw</span></div>
+</div>
+
+<div id="shot" class="layer">
+  <div id="cam">
+    <img id="f1" src="footage/01-loading.jpg" alt="">
+    <img id="f2" src="footage/02-card.jpg" alt="">
+    <img id="f3" src="footage/03-tersalin.jpg" alt="">
+    <img id="f4" src="footage/04-settings.jpg" alt="">
+    <!-- koordinat dalam piksel footage 1024×724 -->
+    <div id="erMark" class="mark" style="left:767px;top:549px;width:226px;height:71px"></div>
+    <div id="btnMark" class="mark" style="left:767px;top:647px;width:88px;height:31px"></div>
+    <div id="rip" class="ripple"></div>
+    <div id="setMark" class="mark" style="left:765px;top:378px;width:230px;height:290px"></div>
+  </div>
+</div>
+
+<div id="c1" class="cap"><h2 data-t="c1h"></h2><p data-t="c1p"></p></div>
+<div id="c2" class="cap"><h2 data-t="c2h"></h2><p data-t="c2p"></p></div>
+<div id="c3" class="cap"><h2 data-t="c3h"></h2><p data-t="c3p"></p><div><span id="ok" class="ok" data-t="ok"></span></div></div>
+
+<div id="sheet" class="layer">
+  <div class="head"><div><h2 data-t="sh"></h2><p data-t="sp"></p></div><span class="badge" data-t="badge"></span></div>
+  <div class="paper"><div class="clip">
+    <!-- Isi = tabel "Contoh format" di docs/index.html (angka ilustrasi). Judul kolom = keluaran asli
+         "Salin judul kolom" (UI kartu berbahasa Indonesia di kedua locale). -->
+    <table id="tbl">
+      <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th></tr></thead>
+      <tbody>
+        <tr><th>1</th><td>Username</td><td>Nama</td><td>Followers</td><td>Rata-rata views</td><td>Rata-rata likes</td><td>Rata-rata komentar</td><td>Rata-rata share</td><td>ER followers (%)</td><td>ER views total (%)</td><td>ER views rata-rata (%)</td><td>Jumlah video</td><td>Tanggal</td></tr>
+        <tr id="r2"><th>2</th><td>@kreator_satu</td><td>Kreator Satu</td><td class="n">125000</td><td class="n">48200</td><td class="n">3900</td><td class="n">210</td><td class="n">95</td><td class="n er">3,29</td><td class="n er">8,72</td><td class="n er">8,95</td><td class="n">12</td><td>2026-10-16</td></tr>
+        <tr id="r3"><th>3</th><td>@kreator_dua</td><td>Kreator Dua</td><td class="n">840000</td><td class="n">210500</td><td class="n">12600</td><td class="n">640</td><td class="n">410</td><td class="n er">1,58</td><td class="n er">6,48</td><td class="n er">6,71</td><td class="n">12</td><td>2026-10-16</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</div>
+
+<div id="c4" class="cap"><h2 data-t="c4h"></h2><p data-t="c4p"></p></div>
+
+<div id="priv" class="layer center">
+  <h2 data-t="ph"></h2>
+  <ul>
+    <li id="p1"><svg viewBox="0 0 24 24" fill="none" stroke="#25F4EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><span data-t="p1"></span></li>
+    <li id="p2"><svg viewBox="0 0 24 24" fill="none" stroke="#25F4EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><span data-t="p2"></span></li>
+    <li id="p3"><svg viewBox="0 0 24 24" fill="none" stroke="#25F4EE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg><span data-t="p3"></span></li>
+  </ul>
+</div>
+
+<div id="end" class="layer center">
+  <img class="logo" src="../../assets/icon.svg" alt="">
+  <div class="name">Pantaw</div>
+  <div class="cta" data-t="cta"></div>
+  <div class="url">anditriana.github.io/pantaw</div>
+  <div class="fine" data-t="fine"></div>
+</div>
+
+<div id="thumb" class="layer bg">
+  <div class="t"><img src="../../assets/icon.svg" alt=""><h1 data-t="thumb"></h1></div>
+  <div class="crop"><div class="in" style="transform:translate(-2092px,-1098px) scale(2.8)">
+    <img src="footage/02-card.jpg" alt="">
+    <div class="mark" style="left:767px;top:549px;width:226px;height:71px"></div>
+  </div></div>
+</div>
+
+<script>
+const T = {
+  id: {
+    hook: 'Cek <em>engagement rate</em> KOL TikTok dalam 1 detik',
+    c1h: 'Buka profil TikTok kreator', c1p: 'Kartu Pantaw muncul otomatis di pojok kanan bawah.',
+    c2h: 'ER langsung terhitung', c2p: 'ER followers &amp; ER views dari 12 video terbaru, pinned dikecualikan.',
+    c3h: 'Klik Salin data', c3p: 'Satu baris data KOL langsung tersalin.', ok: 'Tersalin ✓',
+    sh: 'Tempel ke spreadsheet', sp: 'Google Sheets atau Excel — satu baris per KOL.', badge: 'Contoh format · angka ilustrasi',
+    c4h: 'Atur kolom ⚙', c4p: 'Pilih kolom yang tampil dan urutannya — dipakai juga saat Salin data.',
+    ph: 'Privasi: semua lokal', p1: 'Dihitung di browser Anda', p2: 'Tanpa login, tanpa server', p3: 'Tanpa analytics atau telemetri',
+    cta: 'Gratis di Chrome Web Store', fine: 'Tidak berafiliasi dengan TikTok.',
+    thumb: 'Cek <em>ER</em> KOL<br>TikTok dalam<br>1 detik',
+  },
+  en: {
+    hook: 'Check a TikTok KOL’s <em>engagement rate</em> in 1 second',
+    c1h: 'Open any TikTok creator profile', c1p: 'The Pantaw card appears automatically in the bottom-right corner.',
+    c2h: 'ER, calculated instantly', c2p: 'ER by followers &amp; by views across the 12 latest videos, pinned excluded.',
+    c3h: 'Click “Salin&nbsp;data”', c3p: 'Copies the KOL’s stats as one row.', ok: 'Tersalin ✓ = Copied',
+    sh: 'Paste into your sheet', sp: 'Google Sheets or Excel — one row per KOL.', badge: 'Example format · illustrative numbers',
+    c4h: 'Choose columns ⚙', c4p: 'Pick which columns show and their order — also used when copying.',
+    ph: 'Privacy: everything stays local', p1: 'Calculated in your browser', p2: 'No login, no server', p3: 'No analytics or telemetry',
+    cta: 'Free on the Chrome Web Store', fine: 'Interface in Indonesian · Not affiliated with TikTok.',
+    thumb: 'Check a<br>TikTok KOL’s <em>ER</em><br>in 1 second',
+  },
+};
+const q = new URLSearchParams(location.search);
+const lang = q.get('lang') === 'en' ? 'en' : 'id';
+document.documentElement.lang = lang;
+document.querySelectorAll('[data-t]').forEach((el) => { el.innerHTML = T[lang][el.dataset.t]; });
+
+const DURATION = 42;
+const $ = (id) => document.getElementById(id);
+const clamp = (x) => Math.min(1, Math.max(0, x));
+const ease = (x) => (x < .5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2);
+const ramp = (t, a, b) => ease(clamp((t - a) / (b - a)));
+// 0 → 1 di [a,b], tahan, 1 → 0 di [c,d]
+const win = (t, a, b, c, d) => Math.min(ramp(t, a, b), 1 - ramp(t, c, d));
+const show = (el, o, dy = 0) => { el.style.opacity = o; el.style.visibility = o > 0.001 ? 'visible' : 'hidden'; el.style.transform = dy ? `translateY(${dy}px)` : ''; };
+const cap = (el, t, a, d) => { const o = win(t, a, a + .5, d - .4, d); show(el, o, (1 - ramp(t, a, a + .6)) * 30); };
+
+// Kamera: titik footage (fx,fy) diletakkan di (px,py) dalam #shot (1360×1080), skala s. Saat zoom, tepi kanan/bawah
+// footage ditempel ke tepi layar supaya tidak ada area kosong.
+const W = { fx: 512, fy: 362, s: 1.33, px: 680, py: 540 };
+const C = { fx: 880, fy: 553, s: 2.5, px: 1360 - 144 * 2.5, py: 1080 - 171 * 2.5 };
+const S = { fx: 880, fy: 472, s: 2.0, px: 1360 - 144 * 2.0, py: 1080 - 252 * 2.0 };
+const keys = [[0, W], [7.4, W], [9.2, C], [22.7, C], [23.1, W], [24.8, W], [26.4, S], [DURATION, S]];
+function camera(t) {
+  let i = 0; while (i < keys.length - 2 && t >= keys[i + 1][0]) i++;
+  const [t0, a] = keys[i], [t1, b] = keys[i + 1], k = ramp(t, t0, t1);
+  const lerp = (p) => a[p] + (b[p] - a[p]) * k;
+  const s = lerp('s'), fx = lerp('fx'), fy = lerp('fy');
+  $('cam').style.transform = `translate(${lerp('px') - fx * s}px, ${lerp('py') - fy * s}px) scale(${s})`;
+}
+
+window.seek = (t) => {
+  show($('thumb'), 0);
+  // 1. Hook
+  const h = 1 - ramp(t, 3.1, 3.5);
+  show($('hook'), h);
+  $('hook').querySelector('.logo').style.transform = `scale(${0.6 + 0.4 * ramp(t, 0, .7)})`;
+  $('hook').querySelector('h1').style.opacity = ramp(t, .35, 1.0);
+  $('hook').querySelector('h1').style.transform = `translateY(${(1 - ramp(t, .35, 1.0)) * 40}px)`;
+
+  // 2–4. Footage
+  show($('shot'), win(t, 3.3, 3.9, 30.2, 30.7));
+  camera(t);
+  $('f2').style.opacity = ramp(t, 6.0, 6.6);
+  $('f3').style.opacity = ramp(t, 15.1, 15.35);
+  $('f4').style.opacity = ramp(t, 22.8, 23.1);
+  $('f1').style.opacity = 1 - ramp(t, 22.8, 23.1);
+  show($('erMark'), win(t, 10.0, 10.5, 13.9, 14.3) * (0.8 + 0.2 * Math.cos((t - 10) * 4)));
+  show($('btnMark'), win(t, 15.3, 15.6, 17.4, 17.8));
+  const rk = clamp((t - 15.0) / 0.8), rs = 20 + 60 * ease(rk);
+  Object.assign($('rip').style, { left: `${811 - rs / 2}px`, top: `${662 - rs / 2}px`, width: `${rs}px`, height: `${rs}px` });
+  show($('rip'), t >= 15.0 && t < 15.8 ? 1 - rk : 0);
+  show($('setMark'), win(t, 26.8, 27.3, 29.6, 30.1));
+
+  cap($('c1'), t, 3.8, 9.5);
+  cap($('c2'), t, 9.6, 14.4);
+  cap($('c3'), t, 14.5, 18.0);
+  show($('ok'), ramp(t, 15.4, 15.8));
+  cap($('c4'), t, 23.8, 30.3);
+
+  // 3b. Spreadsheet contoh
+  const sv = win(t, 17.6, 18.2, 23.1, 23.6);
+  show($('sheet'), sv);
+  $('sheet').querySelector('.paper').style.transform = `translateY(${(1 - ramp(t, 17.8, 18.5)) * 80}px)`;
+  show($('r2'), ramp(t, 18.9, 19.3));
+  show($('r3'), ramp(t, 19.9, 20.3));
+  $('r2').classList.toggle('paste', t >= 18.9 && t < 19.9);
+  $('r3').classList.toggle('paste', t >= 19.9 && t < 21.0);
+  // geser tabel ke kiri supaya kolom ER (H–J) terlihat
+  $('tbl').style.transform = `translateX(${-panX * ramp(t, 20.9, 22.0)}px)`;
+  document.querySelectorAll('td.er').forEach((td) => td.classList.toggle('hl', t >= 21.6));
+
+  // 5. Privasi
+  show($('priv'), win(t, 30.8, 31.3, 36.0, 36.4));
+  ['p1', 'p2', 'p3'].forEach((id, i) => show($(id), ramp(t, 31.5 + i * .5, 32.0 + i * .5), (1 - ramp(t, 31.5 + i * .5, 32.0 + i * .5)) * 30));
+
+  // 6. Penutup
+  show($('end'), ramp(t, 36.6, 37.2));
+  $('end').querySelector('.logo').style.transform = `scale(${0.7 + 0.3 * ramp(t, 36.6, 37.4)})`;
+  return new Promise((r) => requestAnimationFrame(() => r(true)));
+};
+
+window.thumb = () => {
+  ['hook', 'shot', 'c1', 'c2', 'c3', 'c4', 'sheet', 'priv', 'end'].forEach((id) => show($(id), 0));
+  show($('thumb'), 1);
+  return new Promise((r) => requestAnimationFrame(() => r(true)));
+};
+
+let panX = 0;
+window.ready = Promise.all([...document.images].map((im) => im.decode())).then(() => document.fonts.ready).then(() => {
+  // jarak geser = tepi kanan kolom J (ER views rata-rata) sampai tepi kanan kertas, sisakan 120px
+  const j = $('tbl').querySelector('tbody tr td:nth-of-type(10)'), clip = document.querySelector('.paper .clip');
+  panX = Math.max(0, j.offsetLeft + j.offsetWidth - clip.clientWidth + 120);
+  return DURATION;
+});
+</script>
+</html>
