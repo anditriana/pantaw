@@ -1,8 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "KOL ER Checker (TikTok)",
+  "name": "Pantaw – KOL ER Checker for TikTok",
+  "short_name": "Pantaw",
   "version": "0.1.0",
-  "description": "Cek engagement rate kreator TikTok langsung di halaman profil. Semua hitungan lokal di browser.",
+  "description": "Cek engagement rate (ER) kreator TikTok langsung di halaman profil: rata-rata views, likes, komentar. Dihitung lokal, tanpa server.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "permissions": ["storage"],
   "host_permissions": ["https://www.tiktok.com/*"],
   "content_scripts": [

@@ -1,11 +1,14 @@
 import * as esbuild from 'esbuild';
 import { copyFileSync, mkdirSync, rmSync } from 'node:fs';
+import { writeIcons } from './icons.mjs';
 
 const watch = process.argv.includes('--watch');
 
 rmSync('dist', { recursive: true, force: true });
 mkdirSync('dist');
 copyFileSync('manifest.json', 'dist/manifest.json');
+mkdirSync('dist/icons');
+writeIcons('dist/icons');
 
 const options = {
   entryPoints: { content: 'src/content.ts', 'main-world': 'src/main-world.ts' },
