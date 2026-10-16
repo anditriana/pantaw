@@ -3,24 +3,354 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pantaw – KOL ER Checker for TikTok</title>
-  <meta name="description" content="Extension Chrome untuk cek engagement rate kreator TikTok langsung di halaman profil. Dihitung lokal, tanpa server.">
+  <title>Pantaw – Cek engagement rate KOL TikTok langsung di profil</title>
+  <meta name="description" content="Extension Chrome gratis untuk cek engagement rate (ER) kreator TikTok langsung di halaman profil. Salin ke spreadsheet satu klik. Dihitung lokal, tanpa server, tanpa login.">
+  <meta name="theme-color" content="#4F46E5">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pantaw">
+  <meta property="og:title" content="Pantaw – Cek engagement rate KOL TikTok langsung di profil">
+  <meta property="og:description" content="ER dari 12 video terbaru, rata-rata views/likes/komentar/share, salin ke spreadsheet satu klik. Gratis, semua dihitung di browser Anda.">
+  <meta property="og:url" content="https://anditriana.github.io/pantaw/">
+  <meta property="og:image" content="https://anditriana.github.io/pantaw/img/card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <style>
-    :root { color-scheme: light dark; --fg: #1f2937; --muted: #6b7280; --bg: #ffffff; --accent: #4f46e5; }
-    @media (prefers-color-scheme: dark) { :root { --fg: #e5e7eb; --muted: #9ca3af; --bg: #111827; --accent: #a5b4fc; } }
-    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-    main { max-width: 720px; margin: 0 auto; padding: 48px 20px; }
-    h1 { font-size: 1.6rem; line-height: 1.3; margin: 0 0 12px; }
+    :root {
+      color-scheme: light dark;
+      --brand: #4F46E5; --brand-strong: #4338CA; --on-brand: #ffffff;
+      --fg: #111827; --muted: #4b5563; --bg: #ffffff; --soft: #f5f5ff; --card: #ffffff; --line: #e5e7eb;
+      --accent: #4F46E5;
+      --radius: 16px; --max: 1080px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fg: #f3f4f6; --muted: #a1a1aa; --bg: #0b0d17; --soft: #12142a; --card: #161935; --line: #262a4d;
+        --accent: #a5b4fc;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: var(--accent); }
-    .muted { color: var(--muted); }
+    img { max-width: 100%; height: auto; display: block; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
+    h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin: 0 0 8px; }
+    .lead { color: var(--muted); margin: 0 0 32px; max-width: 60ch; }
+    section { padding: 64px 0; }
+    .alt { background: var(--soft); }
+
+    /* Header */
+    header.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; color: var(--fg); text-decoration: none; }
+    .brand img { width: 30px; height: 30px; }
+    nav.links { display: flex; gap: 20px; font-size: 0.95rem; }
+    nav.links a { color: var(--muted); text-decoration: none; }
+    nav.links a:hover { color: var(--fg); }
+    @media (max-width: 640px) { nav.links .hide-sm { display: none; } }
+
+    /* Buttons */
+    .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 12px; font-weight: 600; text-decoration: none; border: 1px solid transparent; transition: transform .15s, background .15s; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--brand); color: var(--on-brand); box-shadow: 0 8px 24px -8px rgba(79, 70, 229, .6); }
+    .btn-primary:hover { background: var(--brand-strong); }
+    .btn-ghost { color: var(--fg); border-color: var(--line); background: var(--card); }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    @media (max-width: 480px) { .btns .btn { flex: 1 1 100%; } }
+
+    /* Hero */
+    .hero { padding: 56px 0 40px; background: radial-gradient(1200px 500px at 50% -10%, rgba(79, 70, 229, .18), transparent 70%); }
+    .hero .wrap { display: grid; gap: 40px; }
+    .eyebrow { display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--accent); background: var(--soft); border: 1px solid var(--line); padding: 4px 12px; border-radius: 999px; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.25rem); margin: 0 0 16px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p.sub { font-size: 1.125rem; color: var(--muted); margin: 0 0 28px; max-width: 54ch; }
+    .trust { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 20px 0 0; padding: 0; list-style: none; font-size: 0.9rem; color: var(--muted); }
+    .trust li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+    @media (min-width: 900px) { .hero .wrap { grid-template-columns: 1fr 1.15fr; align-items: center; } .hero { padding: 80px 0 64px; } }
+
+    /* Screenshot */
+    .shot { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #000; box-shadow: 0 24px 60px -24px rgba(17, 24, 39, .35); }
+    .shot img { width: 100%; }
+    .stage { display: grid; place-items: center; padding: 28px 20px; border-radius: var(--radius); border: 1px solid var(--line);
+      background: radial-gradient(circle at 50% 0%, rgba(79, 70, 229, .22), transparent 70%), var(--soft); }
+    .stage img { border-radius: 14px; box-shadow: 0 18px 40px -18px rgba(17, 24, 39, .55); }
+    figure { margin: 0; }
+    figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 12px; }
+    .note { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+
+    /* Contoh format spreadsheet (ilustrasi CSS, bukan screenshot) */
+    .sheet-box { margin-top: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); overflow: hidden; }
+    .sheet-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+    .sheet-head b { font-size: 1rem; }
+    .badge { font-size: 0.75rem; font-weight: 600; color: var(--accent); border: 1px solid var(--line); background: var(--soft); padding: 2px 10px; border-radius: 999px; }
+    .sheet-scroll { overflow-x: auto; }
+    table.sheet { border-collapse: collapse; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: nowrap; min-width: 100%; }
+    .sheet th, .sheet td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+    .sheet thead th, .sheet tbody th { background: var(--soft); color: var(--muted); font-weight: 500; text-align: center; }
+    .sheet tbody tr:first-child td { font-weight: 700; }
+    .sheet td.n { text-align: right; }
+
+    /* Fitur */
+    .grid { display: grid; gap: 16px; }
+    @media (min-width: 640px) { .grid.two { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .grid.four { grid-template-columns: repeat(4, 1fr); } .grid.three { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 640px) and (max-width: 959px) { .grid.four { grid-template-columns: repeat(2, 1fr); } }
+    .feat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+    .feat .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: rgba(79, 70, 229, .12); color: var(--accent); margin-bottom: 14px; }
+    .feat .ic svg { width: 22px; height: 22px; }
+    .feat h3 { font-size: 1.05rem; margin: 0 0 6px; }
+    .feat p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+    /* Galeri */
+    .gallery { margin-top: 40px; }
+    .gallery figure { display: flex; flex-direction: column; }
+
+    /* Langkah */
+    ol.steps { list-style: none; padding: 0; margin: 0; counter-reset: s; }
+    ol.steps li { counter-increment: s; position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 22px 22px 76px; }
+    ol.steps li::before { content: counter(s); position: absolute; left: 22px; top: 22px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--brand); color: var(--on-brand); font-weight: 700; }
+    ol.steps h3 { margin: 6px 0 4px; font-size: 1.05rem; }
+    ol.steps p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+    /* Privasi */
+    .privacy { display: grid; gap: 28px; align-items: center; background: linear-gradient(135deg, var(--brand), #6D28D9); color: #fff; border-radius: 24px; padding: 36px 28px; }
+    .privacy h2 { color: #fff; }
+    .privacy p { color: rgba(255, 255, 255, .85); margin: 0 0 16px; }
+    .privacy ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .privacy li { background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .18); border-radius: 12px; padding: 12px 14px; }
+    .privacy a { color: #fff; font-weight: 600; }
+    @media (min-width: 860px) { .privacy { grid-template-columns: 1fr 1fr; padding: 48px; } }
+
+    /* FAQ */
+    .faq { max-width: 760px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 0 20px; margin-bottom: 10px; }
+    summary { cursor: pointer; font-weight: 600; padding: 18px 0; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--accent); font-size: 1.3rem; line-height: 1; }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 0 0 18px; color: var(--muted); }
+
+    /* CTA & footer */
+    .cta { text-align: center; }
+    .cta .btns { justify-content: center; margin-top: 24px; }
+    footer { border-top: 1px solid var(--line); padding: 32px 0 40px; font-size: 0.9rem; color: var(--muted); }
+    footer .wrap { display: grid; gap: 16px; }
+    footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+    footer nav a { color: var(--muted); }
+    @media (min-width: 720px) { footer .wrap { grid-template-columns: 1fr auto; align-items: center; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
   </style>
 </head>
 <body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="icon.svg" alt="" width="30" height="30">Pantaw</a>
+    <nav class="links">
+      <a class="hide-sm" href="#fitur">Fitur</a>
+      <a class="hide-sm" href="#cara-pakai">Cara pakai</a>
+      <a href="#faq">FAQ</a>
+      <a href="privacy.html">Privasi</a>
+    </nav>
+  </div>
+</header>
+
 <main>
-  <h1>Pantaw – KOL ER Checker for TikTok</h1>
-  <p>Pantaw adalah extension Chrome untuk mengecek engagement rate (ER) kreator TikTok langsung di halaman profil: followers, rata-rata views, likes, komentar, dan share dari video terbaru, plus tombol salin ke spreadsheet. Semua dihitung lokal di browser Anda, tanpa server dan tanpa mengumpulkan data.</p>
-  <p><a href="privacy.html">Kebijakan Privasi / Privacy Policy</a> · <a href="https://github.com/anditriana/pantaw">Kode sumber</a></p>
-  <p class="muted">Tidak berafiliasi dengan TikTok.</p>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Extension Chrome · Gratis</span>
+        <h1>Cek engagement rate KOL TikTok <span>langsung di halaman profil.</span></h1>
+        <p class="sub">Buka profil kreator, dan Pantaw langsung menampilkan followers, rata-rata views, likes, komentar, share, dan ER dari 12 video terbaru. Tanpa login, tanpa tab tambahan, tanpa hitung manual.</p>
+        <div class="btns">
+          <!-- TODO: ganti href dengan link Chrome Web Store setelah listing tayang -->
+          <a class="btn btn-primary" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Pasang di Chrome
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/anditriana/pantaw">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+            Lihat kode di GitHub
+          </a>
+        </div>
+        <ul class="trust">
+          <li>Gratis</li>
+          <li>Tanpa login</li>
+          <li>Semua dihitung di browser Anda</li>
+        </ul>
+      </div>
+      <figure>
+        <div class="shot">
+          <img src="img/card.jpg" width="1024" height="769" alt="Halaman profil TikTok @tiktok dengan kartu Pantaw di pojok kanan bawah: followers 96,3 jt, rata-rata views, likes, komentar, share, serta ER followers, ER views total, dan ER views rata-rata per video">
+        </div>
+        <figcaption class="note">Contoh di profil publik @tiktok</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="fitur">
+    <div class="wrap">
+      <h2>Semua angka yang Anda butuhkan untuk memilih KOL</h2>
+      <p class="lead">Tidak perlu lagi membuka video satu per satu dan menghitung di kalkulator. Pantaw merangkum performa terbaru kreator dalam satu kartu kecil.</p>
+      <div class="grid four">
+        <div class="feat">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
+          <h3>ER followers &amp; ER views</h3>
+          <p>Dihitung dari 12 video terbaru, video pinned dikecualikan supaya angka tidak terdongkrak video lama yang viral.</p>
+        </div>
+        <div class="feat">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg></div>
+          <h3>Salin ke spreadsheet</h3>
+          <p>Satu klik, satu baris siap tempel di Google Sheets atau Excel. Tempel banyak KOL berurutan untuk membandingkan shortlist.</p>
+        </div>
+        <div class="feat">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10"/><path d="M4 12h16"/><path d="M4 18h7"/><circle cx="17" cy="6" r="2"/><circle cx="14" cy="18" r="2"/></svg></div>
+          <h3>Atur kolom sendiri</h3>
+          <p>Pilih kolom yang tampil dan urutannya lewat tombol ⚙, sesuaikan dengan template laporan tim Anda. Pengaturan diingat.</p>
+        </div>
+        <div class="feat">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>Privat, semua lokal</h3>
+          <p>Tanpa server, tanpa akun, tanpa login. Pantaw tidak mengumpulkan atau mengirim data ke mana pun.</p>
+        </div>
+      </div>
+
+      <div class="grid two gallery">
+        <figure>
+          <div class="stage">
+            <img src="img/card-zoom.png" width="338" height="413" alt="Kartu Pantaw untuk @tiktok: followers, rata-rata views, likes, komentar, share, tiga angka ER, dan tombol Salin data serta Salin judul kolom" loading="lazy">
+          </div>
+          <figcaption>Kartu metrik: rata-rata dan ER dari 12 video terakhir, pinned dikecualikan.</figcaption>
+          <p class="note">Contoh di profil publik @tiktok</p>
+        </figure>
+        <figure>
+          <div class="stage">
+            <img src="img/settings.png" width="305" height="588" alt="Panel Pengaturan kolom Pantaw: daftar 13 kolom dengan kotak centang untuk tampil atau sembunyi, tombol panah atas dan bawah untuk urutan, tombol Selesai dan Kembalikan default" loading="lazy">
+          </div>
+          <figcaption>Atur kolom (⚙): centang untuk tampil, ↑ ↓ untuk mengubah urutan.</figcaption>
+          <p class="note">Contoh di profil publik @tiktok</p>
+        </figure>
+      </div>
+
+      <div class="sheet-box">
+        <div class="sheet-head">
+          <b>Hasil tempel di spreadsheet</b>
+          <span class="badge">Contoh format · angka ilustrasi</span>
+        </div>
+        <div class="sheet-scroll">
+          <table class="sheet" aria-label="Contoh format hasil Salin judul kolom dan Salin data di spreadsheet, dengan angka ilustrasi">
+            <thead>
+              <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th><th>M</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>1</th><td>Username</td><td>Nama</td><td>Followers</td><td>Rata-rata views</td><td>Rata-rata likes</td><td>Rata-rata komentar</td><td>Rata-rata share</td><td>ER followers (%)</td><td>ER views total (%)</td><td>ER views rata-rata (%)</td><td>Jumlah video</td><td>Tanggal</td><td>Link profil</td></tr>
+              <tr><th>2</th><td>@kreator_satu</td><td>Kreator Satu</td><td class="n">125000</td><td class="n">48200</td><td class="n">3900</td><td class="n">210</td><td class="n">95</td><td class="n">3,29</td><td class="n">8,72</td><td class="n">8,95</td><td class="n">12</td><td>2026-10-16</td><td>https://www.tiktok.com/@kreator_satu</td></tr>
+              <tr><th>3</th><td>@kreator_dua</td><td>Kreator Dua</td><td class="n">840000</td><td class="n">210500</td><td class="n">12600</td><td class="n">640</td><td class="n">410</td><td class="n">1,58</td><td class="n">6,48</td><td class="n">6,71</td><td class="n">12</td><td>2026-10-16</td><td>https://www.tiktok.com/@kreator_dua</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="note">Baris 1 dari tombol <em>Salin judul kolom</em>; tiap KOL satu baris dari <em>Salin data</em>, tinggal tempel berurutan. Kolom dan urutannya mengikuti pengaturan ⚙.</p>
+    </div>
+  </section>
+
+  <section id="cara-pakai" class="alt">
+    <div class="wrap">
+      <h2>Cara pakai</h2>
+      <p class="lead">Tiga langkah, tidak sampai satu menit.</p>
+      <ol class="steps grid three">
+        <li>
+          <h3>Pasang extension</h3>
+          <p>Tambahkan Pantaw ke Chrome dari Chrome Web Store. Tidak perlu daftar atau login.</p>
+        </li>
+        <li>
+          <h3>Buka profil TikTok</h3>
+          <p>Kunjungi profil kreator di tiktok.com, misalnya <code>tiktok.com/@namakreator</code>. Kartu Pantaw muncul di pojok kanan bawah.</p>
+        </li>
+        <li>
+          <h3>Baca &amp; salin</h3>
+          <p>Lihat ER dan rata-rata performanya, lalu klik <em>Salin data</em> untuk menempelkannya ke spreadsheet shortlist Anda.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="privasi">
+    <div class="wrap">
+      <div class="privacy">
+        <div>
+          <h2>Data Anda tetap di browser Anda</h2>
+          <p>Pantaw hanya membaca data yang sudah dimuat oleh halaman TikTok yang sedang Anda buka, lalu menghitungnya di perangkat Anda sendiri.</p>
+          <p><a href="privacy.html">Baca kebijakan privasi lengkap →</a></p>
+        </div>
+        <ul>
+          <li>Tidak ada server, akun, analytics, atau telemetri.</li>
+          <li>Tidak membuat permintaan jaringan sendiri; hanya berjalan di tiktok.com.</li>
+          <li>Yang disimpan hanya pengaturan kolom, di browser Anda.</li>
+          <li>Kode sumber terbuka di GitHub, bisa diperiksa siapa saja.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="alt">
+    <div class="wrap faq">
+      <h2>Pertanyaan umum</h2>
+      <p class="lead">Jawaban singkat dan jujur.</p>
+      <details>
+        <summary>Apakah Pantaw gratis?</summary>
+        <p>Ya, gratis tanpa batas pemakaian dan tanpa akun.</p>
+      </details>
+      <details>
+        <summary>Apakah data saya dan data kreator aman?</summary>
+        <p>Pantaw tidak mengumpulkan data. Semua hitungan dilakukan di browser Anda; tidak ada server yang menerima apa pun. Data profil dan video hanya ada di memori tab dan hilang saat tab ditutup. Clipboard hanya ditulis saat Anda menekan tombol salin. Rinciannya ada di <a href="privacy.html">kebijakan privasi</a>.</p>
+      </details>
+      <details>
+        <summary>Seberapa akurat angkanya?</summary>
+        <p>Angka diambil dari data yang dimuat halaman TikTok itu sendiri, bukan perkiraan, dan memakai angka presisi bila tersedia (bukan versi bulat seperti "1,2M"). Hitungan memakai 12 video terbaru tanpa video pinned; kalau kreator punya kurang dari 12 video, kartu menyebutkan jumlah sampelnya. Angka bisa berubah seiring video terus ditonton, jadi anggap sebagai potret saat halaman dibuka.</p>
+      </details>
+      <details>
+        <summary>Dari mana angka share? Kok tidak terlihat di TikTok?</summary>
+        <p>Jumlah share tidak ditampilkan di halaman profil TikTok, tapi ikut terkirim dalam data video yang dimuat halaman. Pantaw membacanya dari situ dan memakainya di rata-rata share serta ER views.</p>
+      </details>
+      <details>
+        <summary>Bagaimana rumus ER-nya?</summary>
+        <p><strong>ER followers</strong> = rata-rata (likes + komentar) ÷ followers × 100%. <strong>ER views (total)</strong> = total (likes + komentar + share) ÷ total views × 100%. <strong>ER views (rata-rata/video)</strong> = rata-rata ER views tiap video.</p>
+      </details>
+      <details>
+        <summary>Apakah perlu login TikTok?</summary>
+        <p>Pantaw sendiri tidak butuh login. Selama halaman profil TikTok bisa dibuka dan videonya tampil di browser Anda, kartu Pantaw akan terisi.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>Pilih KOL lebih cepat, dengan angka yang jelas.</h2>
+      <p class="lead" style="margin: 0 auto;">Pasang sekali, langsung terpakai di setiap profil TikTok yang Anda buka.</p>
+      <div class="btns">
+        <!-- TODO: ganti href dengan link Chrome Web Store setelah listing tayang -->
+        <a class="btn btn-primary" href="#">Pasang di Chrome</a>
+        <a class="btn btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLScbND6vNpF3qs1xwdoRVBqN4rPflwlAMZY8rtbEgm_pzU4eSw/viewform" target="_blank" rel="noopener noreferrer">Request fitur</a>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="./"><img src="icon.svg" alt="" width="24" height="24">Pantaw</a>
+      <p style="margin: 8px 0 0;">Tidak berafiliasi dengan, didukung, atau disponsori oleh TikTok maupun ByteDance.</p>
+    </div>
+    <nav>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScbND6vNpF3qs1xwdoRVBqN4rPflwlAMZY8rtbEgm_pzU4eSw/viewform" target="_blank" rel="noopener noreferrer">Request fitur</a>
+      <a href="https://github.com/anditriana/pantaw">GitHub</a>
+      <a href="privacy.html">Kebijakan privasi</a>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
