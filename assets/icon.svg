@@ -1,8 +1,11 @@
 <!-- Sumber ikon Pantaw (lup + mata). PNG 16/32/48/128 dibuat oleh scripts/icons.mjs saat build;
-     rasterizer itu hanya mengenal <rect rx>, <circle>, <line stroke-linecap="round">, warna #RRGGBB. -->
+     rasterizer itu hanya mengenal <rect rx>, <circle>, <line stroke-linecap="round">, warna #RRGGBB.
+     Lup merah di atas hitam; salinan cyan digeser sedikit ke kiri-atas sebagai aksen "glitch" halus. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect x="4" y="4" width="120" height="120" rx="26" fill="#4F46E5"/>
-  <circle cx="56" cy="56" r="28" fill="none" stroke="#FFFFFF" stroke-width="14"/>
+  <rect x="4" y="4" width="120" height="120" rx="26" fill="#000000"/>
+  <circle cx="52" cy="52" r="28" fill="none" stroke="#25F4EE" stroke-width="14"/>
+  <line x1="74" y1="74" x2="96" y2="96" stroke="#25F4EE" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="56" cy="56" r="28" fill="none" stroke="#FE2C55" stroke-width="14"/>
   <circle cx="56" cy="56" r="11" fill="#FFFFFF"/>
-  <line x1="78" y1="78" x2="100" y2="100" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/>
+  <line x1="78" y1="78" x2="100" y2="100" stroke="#FE2C55" stroke-width="16" stroke-linecap="round"/>
 </svg>
