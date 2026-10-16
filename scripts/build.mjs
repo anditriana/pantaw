@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild';
-import { copyFileSync, mkdirSync, rmSync } from 'node:fs';
+import { copyFileSync, cpSync, mkdirSync, rmSync } from 'node:fs';
 import { writeIcons } from './icons.mjs';
 
 const watch = process.argv.includes('--watch');
@@ -7,6 +7,7 @@ const watch = process.argv.includes('--watch');
 rmSync('dist', { recursive: true, force: true });
 mkdirSync('dist');
 copyFileSync('manifest.json', 'dist/manifest.json');
+cpSync('_locales', 'dist/_locales', { recursive: true });
 mkdirSync('dist/icons');
 writeIcons('dist/icons');
 
