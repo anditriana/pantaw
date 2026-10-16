@@ -204,7 +204,7 @@ function render() {
   ensureHost().innerHTML =
     `<style>${CARD_CSS}</style>` +
     `<div class="card${collapsed ? ' collapsed' : ''}">` +
-    `<div class="head"><button class="title" data-action="toggle" title="Ciutkan/buka">KOL · @${esc(uid)}</button>` +
+    `<div class="head"><button class="title" data-action="toggle" title="Ciutkan/buka">Pantaw · @${esc(uid)}</button>` +
     `<button data-action="settings" title="Pengaturan kolom">⚙</button>` +
     `<button data-action="close" title="Tutup untuk profil ini">×</button></div>` +
     `<div class="body">${body}</div></div>`;
