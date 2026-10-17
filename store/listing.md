@@ -207,6 +207,8 @@ clipboard hanya ditulis saat klik, link Request fitur tanpa data, tanpa remote c
 | Small promo tile | 440×280 PNG/JPEG | Ya | **Dibuat** | `store/promo-small.png` (sumber `store/promo-small.svg`) |
 | Marquee promo tile | 1400×560 | Tidak | Belum, tidak perlu untuk rilis pertama | — |
 | Video YouTube promo | 1920×1080, 42 dtk | Tidak | **Ada** — diupload Unlisted | ID https://youtu.be/OPiShxayCyk · EN https://youtu.be/EWtBLgPVNeE (sumber `store/video/`) |
+| Gambar promo Story (IG/WA, bukan untuk store) | 1080×1920 PNG, 3 slide | Tidak | **Dibuat** — CTA: badge "Segera di Chrome Web Store" + "DM untuk file mentahnya" (file beta via DM, listing belum tayang; tanpa URL); safe zone 250 px atas / 340 px bawah kosong | `release/story/pantaw-story-{1,2,3}.png` (tidak di-commit), sumber `store/story/`, render `node store/story/render.mjs` (`--guide` = overlay safe zone) |
+| Gambar carousel feed Instagram (bukan untuk store) | 1080×1350 (4:5) PNG, 3 slide | Tidak | **Dibuat** — isi sama dengan Story, layout ditata ulang untuk 4:5, margin 80 px | `release/story/feed/pantaw-feed-{1,2,3}.png` (tidak di-commit), sumber sama `store/story/story.html?format=feed`, render `node store/story/render.mjs --feed` |
 
 Membuat ulang semua PNG: `node store/render.mjs` (dari akar repo; butuh `google-chrome`, atau set `CHROME=/path/ke/chrome`).
 `scripts/icons.mjs` tidak dipakai karena rasterizer mininya tidak bisa merender teks maupun menggabungkan gambar raster.
