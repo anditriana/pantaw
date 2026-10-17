@@ -3,22 +3,32 @@
 // `stats` berisi angka yang dibulatkan (mis. 96200000); `statsV2` berisi string
 // yang lebih presisi, jadi statsV2 diutamakan.
 
+export type Platform = 'tiktok' | 'instagram';
+
 export interface Profile {
+  /** Tidak diisi = TikTok. */
+  platform?: Platform;
   uniqueId: string;
   nickname: string;
   followers: number;
 }
 
-export interface Video {
+/** Satu post (video TikTok / post IG). null = angka tidak tersedia (bukan 0), dikeluarkan dari rata-rata. */
+export interface Post {
   id: string;
-  authorId: string; // uniqueId pemilik video
+  authorId: string; // uniqueId pemilik post
   createTime: number; // detik epoch
   pinned: boolean;
-  views: number;
-  likes: number;
+  /** null: foto/carousel IG, reels di grid profil IG, atau likes disembunyikan. */
+  views: number | null;
+  /** null: likes disembunyikan pemilik (IG like_and_view_counts_disabled). */
+  likes: number | null;
   comments: number;
-  shares: number;
+  /** null: IG tidak menyediakan jumlah share. */
+  shares: number | null;
 }
+
+export type Video = Post;
 
 type Obj = Record<string, unknown>;
 

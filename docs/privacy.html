@@ -6,7 +6,7 @@
   <title>Kebijakan Privasi — Pantaw</title>
   <link rel="icon" type="image/svg+xml" href="icon.svg">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="Kebijakan privasi Pantaw – KOL ER Checker for TikTok: semua hitungan lokal di browser, tanpa server, tidak mengumpulkan data.">
+  <meta name="description" content="Kebijakan privasi Pantaw – KOL ER Checker (TikTok &amp; Instagram): semua hitungan lokal di browser, tanpa server, tidak mengumpulkan data.">
   <style>
     :root { color-scheme: light dark; --fg: #121212; --muted: #52525b; --bg: #ffffff; --line: #e5e7eb; --accent: #D4113A; }
     @media (prefers-color-scheme: dark) { :root { --fg: #f5f5f5; --muted: #a1a1aa; --bg: #000000; --line: #2a2a2a; --accent: #FE2C55; } }
@@ -47,15 +47,16 @@
 </header>
 <main>
   <h1>Kebijakan Privasi Pantaw</h1>
-  <p class="muted">Pantaw – KOL ER Checker for TikTok (extension Chrome)<br>Berlaku sejak 16 Oktober 2026</p>
+  <p class="muted">Pantaw – KOL ER Checker untuk TikTok &amp; Instagram (extension Chrome)<br>Berlaku sejak 17 Oktober 2026 (versi 0.2.0; sebelumnya 16 Oktober 2026)</p>
 
   <h2>Ringkasnya</h2>
   <p>Pantaw tidak mengumpulkan, menyimpan di server, menjual, atau mengirim data Anda maupun data kreator ke mana pun. Semua hitungan dilakukan di browser Anda sendiri.</p>
 
   <h2>Data apa yang dibaca</h2>
   <ul>
-    <li>Pantaw hanya berjalan di <code>https://www.tiktok.com/*</code>.</li>
-    <li>Pantaw hanya membaca data yang <strong>sudah dimuat oleh halaman TikTok</strong> itu sendiri: data profil di halaman (jumlah followers, nama, username) dan daftar video terbaru yang diminta halaman (views, likes, komentar, share). Pantaw tidak membuat permintaan jaringan sendiri.</li>
+    <li>Pantaw hanya berjalan di <code>https://www.tiktok.com/*</code> dan <code>https://www.instagram.com/*</code>.</li>
+    <li>Pantaw hanya membaca data yang <strong>sudah dimuat oleh halaman TikTok atau Instagram</strong> itu sendiri: data profil di halaman (jumlah followers, nama, username) dan daftar video/post terbaru yang diminta halaman (views, likes, komentar, share bila tersedia). Pantaw tidak membuat permintaan jaringan sendiri.</li>
+    <li>Di Instagram, Pantaw berjalan di dalam sesi login Anda sendiri, tetapi tidak membaca atau menyimpan cookie, token, pesan, maupun data akun Anda. Dari respons yang dimuat halaman, Pantaw hanya mengambil angka profil dan post (followers, likes, komentar, views reels) lalu membuang sisanya. Tidak ada scroll, klik, atau permintaan otomatis.</li>
     <li>Dari data itu Pantaw menghitung engagement rate (ER) dan rata-rata, lalu menampilkannya di kartu kecil di pojok halaman.</li>
     <li>Data profil dan video hanya ada di memori tab selama halaman terbuka, dan hilang saat tab ditutup atau dimuat ulang. Tidak ada yang disimpan permanen.</li>
   </ul>
@@ -75,8 +76,8 @@
   <h2>Pihak ketiga</h2>
   <p>Pantaw tidak berbagi data dengan pihak ketiga karena memang tidak mengumpulkan data. Pantaw tidak memuat kode dari luar (remote code).</p>
 
-  <h2>Tidak berafiliasi dengan TikTok</h2>
-  <p>Pantaw adalah proyek independen dan tidak berafiliasi dengan, didukung, atau disponsori oleh TikTok maupun ByteDance. TikTok adalah merek dagang dari pemiliknya.</p>
+  <h2>Tidak berafiliasi dengan TikTok maupun Instagram</h2>
+  <p>Pantaw adalah proyek independen dan tidak berafiliasi dengan, didukung, atau disponsori oleh TikTok, ByteDance, Instagram, maupun Meta. TikTok dan Instagram adalah merek dagang dari pemiliknya masing-masing.</p>
 
   <h2>Perubahan kebijakan</h2>
   <p>Jika kebijakan ini berubah, versi terbaru akan dipasang di halaman ini dengan tanggal berlaku yang baru.</p>
@@ -86,16 +87,17 @@
 
   <section class="en" lang="en">
     <h2>Summary in English</h2>
-    <p class="muted">Effective October 16, 2026</p>
+    <p class="muted">Effective October 17, 2026 (version 0.2.0)</p>
     <ul>
-      <li>Pantaw runs only on <code>https://www.tiktok.com/*</code> and only reads data the TikTok page has already loaded (profile follower count, name, username, and recent video stats). It makes no network requests of its own.</li>
+      <li>Pantaw runs only on <code>https://www.tiktok.com/*</code> and <code>https://www.instagram.com/*</code> and only reads data the page has already loaded (profile follower count, name, username, and recent video/post stats). It makes no network requests of its own.</li>
+      <li>On Instagram it runs inside your own logged-in session but never reads or stores cookies, tokens, messages, or your account data; it keeps only profile and post numbers from responses the page loaded and discards the rest. No automated scrolling, clicking, or requests.</li>
       <li>All calculations happen locally in your browser. There is no server. Pantaw does not collect, sell, share, or transmit any data. No accounts, analytics, or telemetry.</li>
       <li>Profile and video data live only in the tab's memory and are discarded when the tab is closed.</li>
       <li><code>chrome.storage.local</code> is used only to remember your column settings (order and visibility) on your device.</li>
       <li>The clipboard is written only when you click <em>Salin data</em> (Copy data) or <em>Salin judul kolom</em> (Copy column headers). It is never read.</li>
       <li>The <em>Request fitur</em> (Request a feature) link opens a Google Form in a new tab when you click it; no data is attached. Anything you submit there is handled by Google.</li>
       <li>No remote code is loaded.</li>
-      <li>Pantaw is not affiliated with, endorsed by, or sponsored by TikTok or ByteDance.</li>
+      <li>Pantaw is not affiliated with, endorsed by, or sponsored by TikTok, ByteDance, Instagram, or Meta.</li>
       <li>Contact: <a href="https://github.com/anditriana/pantaw/issues">open an issue on GitHub</a>.</li>
     </ul>
   </section>

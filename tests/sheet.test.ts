@@ -9,7 +9,7 @@ import { SHEET_COLUMNS, sheetHeader, sheetRow } from '../src/lib/sheet';
 const profile = { uniqueId: 'budi', nickname: 'Budi', followers: 1234567 };
 const metrics = (o: Partial<Metrics> = {}): Metrics => ({
   sampleSize: 12, followers: 1234567, avgViews: 1000.4, avgLikes: 59.5, avgComments: 3.49, avgShares: 0.5,
-  erFollowers: 4.2149, erViews: 1, erViewsAvg: 0.005, ...o,
+  erFollowers: 4.2149, erViews: 1, erViewsAvg: 0.005, hiddenLikes: 0, viewsSampleSize: 12, ...o,
 });
 const date = new Date(2026, 9, 5, 23, 59);
 const cells = (s: string) => s.split('\t');
@@ -63,6 +63,15 @@ describe('sheetHeader / sheetRow', () => {
     expect(r.slice(0, 3)).toEqual(['@budi', '1234567', '1000']);
     expect(h.slice(-3)).toEqual(['ER views rata-rata (%)', 'Link profil', 'Tanggal']);
     expect(r.slice(-3)).toEqual(['0,01', 'https://www.tiktok.com/@budi', '2026-10-05']);
+  });
+
+  it('Instagram: link profil instagram.com, views/share kosong', () => {
+    const ig = { ...profile, platform: 'instagram' as const };
+    const c = cells(sheetRow(ig, metrics({ avgViews: null, avgShares: null, erViews: null, erViewsAvg: null }), date));
+    expect(c).toHaveLength(SHEET_COLUMNS.length);
+    expect(c[3]).toBe('');
+    expect(c[6]).toBe('');
+    expect(c[12]).toBe('https://www.instagram.com/budi/');
   });
 
   it('semua kolom nonaktif → string kosong', () => {

@@ -1,7 +1,11 @@
-# Draft listing Chrome Web Store — Pantaw 0.1.0
+# Draft listing Chrome Web Store — Pantaw 0.2.0 (TikTok + Instagram)
+
+> **0.2.0 (2026-10-17):** menambah Instagram (keputusan user: satu extension, host `https://www.instagram.com/*` wajib,
+> nama jadi "Pantaw – KOL ER Checker"). 0.1.0 (TikTok saja) sudah disubmit Unlisted. Teks di bawah sudah untuk 0.2.0,
+> **kecuali aset grafis** (bagian 3): screenshot, promo tile, dan video masih versi TikTok saja — dibuat ulang (TO DO README).
 
 Isi untuk disalin ke Developer Dashboard. Folder `store/` sengaja **di luar** `docs/` supaya tidak tayang di GitHub Pages.
-Semua klaim di bawah dicocokkan dengan kode (`manifest.json`, `src/`) dan `docs/privacy.html` per 2026-10-16.
+Semua klaim di bawah dicocokkan dengan kode (`manifest.json`, `src/`) dan `docs/privacy.html` per 2026-10-17.
 Jumlah karakter dihitung dengan `[...teks].length` (Node), tanpa spasi/baris awal-akhir.
 
 ---
@@ -17,33 +21,39 @@ dijaga `tests/locales.test.ts`.
 
 | Field | Indonesian (`id`, default) | English (`en`) |
 |---|---|---|
-| Nama (`appName`, maks 75) | `Pantaw – KOL ER Checker for TikTok` (34) | sama (34) |
+| Nama (`appName`, maks 75) | `Pantaw – KOL ER Checker` (23) | sama (23) |
 | Nama pendek (`appShortName`, maks 12) | `Pantaw` (6) | sama (6) |
-| Summary (`appDescription`, maks 132) | lihat di bawah (131) | lihat di bawah (130) |
+| Summary (`appDescription`, maks 132) | lihat di bawah (126) | lihat di bawah (127) |
 
-Summary `id` — 131/132:
-
-```
-Cek engagement rate (ER) kreator TikTok langsung di halaman profil: rata-rata views, likes, komentar. Dihitung lokal, tanpa server.
-```
-
-Summary `en` — 130/132:
+Summary `id` — 126/132:
 
 ```
-Check TikTok creators' engagement rate (ER) right on their profile: average views, likes, comments. Calculated locally, no server.
+Cek engagement rate (ER) kreator TikTok & Instagram di profil: rata-rata views, likes, komentar. Dihitung lokal, tanpa server.
 ```
 
-### Detailed description — Bahasa Indonesia (utama) — 2.060/16.000 karakter
+Summary `en` — 127/132:
 
 ```
-Pantaw membantu marketer, brand, dan agensi menilai kreator (KOL) TikTok tanpa hitung manual. Buka profil kreator di tiktok.com, dan kartu kecil Pantaw muncul di pojok kanan bawah dengan ringkasan performa video terbarunya.
+Check TikTok & Instagram creators' engagement rate (ER) right on their profile: avg views, likes, comments. Calculated locally.
+```
+
+### Detailed description — Bahasa Indonesia (utama)
+
+```
+Pantaw membantu marketer, brand, dan agensi menilai kreator (KOL) TikTok dan Instagram tanpa hitung manual. Buka profil kreator di tiktok.com atau instagram.com, dan kartu kecil Pantaw muncul di pojok kanan bawah dengan ringkasan performa konten terbarunya.
 
 Yang ditampilkan:
 • Followers
-• Rata-rata views, likes, komentar, dan share dari 12 video terbaru (video pinned dikecualikan)
+• Rata-rata views, likes, komentar, dan share dari 12 video/post terbaru (pinned dikecualikan)
 • ER followers = rata-rata (likes + komentar) ÷ followers × 100%
 • ER views (total) = total (likes + komentar + share) ÷ total views × 100%
-• ER views (rata-rata/video) = rata-rata ER views tiap video
+• ER views (rata-rata/post) = rata-rata ER views tiap video/reels
+
+Instagram:
+• ER followers dihitung dari 12 post terbaru di grid profil (foto, carousel, reels).
+• Views hanya ada untuk reels dan hanya dimuat Instagram di tab Reels: buka tab Reels profil, lalu rata-rata views dan ER views (dari 12 reels terbaru) terisi.
+• Instagram tidak menampilkan jumlah share, jadi kolom share kosong.
+• Post yang likes-nya disembunyikan pemilik tidak dihitung; kartu menyebut jumlahnya.
 
 Fitur:
 • Salin data: satu klik menyalin satu baris siap tempel ke Google Sheets atau Excel. Tempel banyak kreator berurutan untuk membandingkan shortlist.
@@ -52,19 +62,19 @@ Fitur:
 
 Cara pakai:
 1. Pasang Pantaw.
-2. Buka profil kreator TikTok, misalnya tiktok.com/@namakreator. Tidak perlu login.
+2. Buka profil kreator, misalnya tiktok.com/@namakreator (tidak perlu login) atau instagram.com/namakreator (Instagram meminta Anda login seperti biasa).
 3. Baca kartunya, lalu klik Salin data bila perlu.
 
 Privasi:
-Semua hitungan dilakukan di browser Anda. Pantaw tidak punya server, tidak memakai analytics atau telemetri, tidak membuat permintaan jaringan sendiri, dan tidak mengumpulkan atau mengirim data ke mana pun. Satu-satunya yang disimpan adalah pengaturan kolom, di perangkat Anda sendiri.
+Semua hitungan dilakukan di browser Anda. Pantaw tidak punya server, tidak memakai analytics atau telemetri, tidak membuat permintaan jaringan sendiri, dan tidak mengumpulkan atau mengirim data ke mana pun. Pantaw tidak membaca cookie, pesan, atau data akun Anda. Satu-satunya yang disimpan adalah pengaturan kolom, di perangkat Anda sendiri.
 
 Keterbatasan:
-• Angka berasal dari data yang sudah dimuat halaman TikTok, jadi hanya akurat sejauh data itu. Bila tampil "Menunggu data video…", gulir atau muat ulang halaman profil.
-• Jumlah share tidak ditampilkan di halaman profil TikTok, tapi ikut ada dalam data video yang dimuat halaman; Pantaw membacanya dari situ.
-• Hanya 12 video terbaru yang dihitung, tanpa video pinned. Kreator dengan kurang dari 12 video dihitung dari video yang ada.
-• Saat ini hanya untuk TikTok di versi web (www.tiktok.com).
+• Angka berasal dari data yang sudah dimuat halaman, jadi hanya akurat sejauh data itu. Bila tampil "Menunggu data…", gulir atau muat ulang halaman profil.
+• Hanya 12 video/post terbaru yang dihitung, tanpa yang pinned. Bila kurang dari 12 karena ada post pinned, gulir grid sedikit.
+• Profil Instagram privat yang tidak Anda ikuti tidak bisa dihitung.
+• Hanya untuk versi web (www.tiktok.com dan www.instagram.com).
 
-Pantaw adalah proyek independen dan tidak berafiliasi dengan, didukung, atau disponsori oleh TikTok maupun ByteDance.
+Pantaw adalah proyek independen dan tidak berafiliasi dengan, didukung, atau disponsori oleh TikTok, ByteDance, Instagram, maupun Meta.
 
 Kode sumber: github.com/anditriana/pantaw
 ```
@@ -77,14 +87,20 @@ bahasa Indonesia di kedua locale (diterjemahkan nanti, TO DO 0.1.x) — karena i
 "The interface is in Indonesian." Langkah di dashboard: bagian 5, "Bahasa kedua".
 
 ```
-Pantaw helps marketers, brands, and agencies assess TikTok creators (KOLs) without manual math. Open a creator's profile on tiktok.com and a small Pantaw card appears in the bottom-right corner with a summary of their recent videos.
+Pantaw helps marketers, brands, and agencies assess TikTok and Instagram creators (KOLs) without manual math. Open a creator's profile on tiktok.com or instagram.com and a small Pantaw card appears in the bottom-right corner with a summary of their recent content.
 
 What it shows:
 • Followers
-• Average views, likes, comments, and shares across the 12 most recent videos (pinned videos excluded)
+• Average views, likes, comments, and shares across the 12 most recent videos/posts (pinned excluded)
 • ER by followers = average (likes + comments) ÷ followers × 100%
 • ER by views (total) = total (likes + comments + shares) ÷ total views × 100%
-• ER by views (per-video average) = average of each video's ER by views
+• ER by views (per-post average) = average of each video's/reel's ER by views
+
+Instagram:
+• ER by followers uses the 12 most recent posts in the profile grid (photos, carousels, reels).
+• Views exist only for reels and Instagram only loads them on the Reels tab: open the profile's Reels tab and average views and ER by views (from the 12 most recent reels) fill in.
+• Instagram does not show share counts, so the share column stays empty.
+• Posts whose owner hid the like count are left out; the card says how many.
 
 Features:
 • Copy data: one click copies a single row ready to paste into Google Sheets or Excel. Paste several creators in a row to compare a shortlist.
@@ -94,15 +110,15 @@ Features:
 The interface is in Indonesian.
 
 Privacy:
-All calculations happen in your browser. Pantaw has no server, no analytics or telemetry, makes no network requests of its own, and does not collect or transmit any data. The only thing stored is your column settings, on your own device.
+All calculations happen in your browser. Pantaw has no server, no analytics or telemetry, makes no network requests of its own, and does not collect or transmit any data. It never reads your cookies, messages, or account data. The only thing stored is your column settings, on your own device.
 
 Limitations:
-• Numbers come from data the TikTok page has already loaded, so they are only as accurate as that data.
-• Share counts are not shown on TikTok profile pages, but they are included in the video data the page loads; Pantaw reads them from there.
-• Only the 12 most recent videos are counted, excluding pinned videos.
-• Works on TikTok's website (www.tiktok.com) only.
+• Numbers come from data the page has already loaded, so they are only as accurate as that data.
+• Only the 12 most recent videos/posts are counted, excluding pinned ones.
+• Private Instagram profiles you don't follow can't be measured.
+• Works on the websites only (www.tiktok.com and www.instagram.com).
 
-Pantaw is an independent project and is not affiliated with, endorsed by, or sponsored by TikTok or ByteDance.
+Pantaw is an independent project and is not affiliated with, endorsed by, or sponsored by TikTok, ByteDance, Instagram, or Meta.
 
 Source code: github.com/anditriana/pantaw
 ```
@@ -131,10 +147,10 @@ kalau belum, kosongkan dan cukup isi **Homepage URL**. Pastikan GitHub Pages sud
 
 ## 2. Tab "Privacy practices"
 
-### Single purpose — 217 karakter
+### Single purpose
 
 ```
-Pantaw shows engagement metrics (followers, average views/likes/comments/shares and engagement rate) for the TikTok creator profile the user is viewing, calculated locally from data the TikTok page has already loaded.
+Pantaw shows engagement metrics (followers, average views/likes/comments/shares and engagement rate) for the TikTok or Instagram creator profile the user is viewing, calculated locally from data the page has already loaded.
 ```
 
 ### Permission justification
@@ -151,7 +167,13 @@ Used only to save the user's column settings (which metrics are shown and in wha
 Pantaw only works on TikTok profile pages. Its content scripts run on www.tiktok.com to read the profile and recent-video stats that the page itself has already loaded (the page's embedded JSON and the page's own /api/post/item_list and /api/user/detail responses), and to display a small results card. It makes no network requests of its own and does not run on any other site.
 ```
 
-Cocok dengan kode: `manifest.json` hanya `permissions: ["storage"]` + `host_permissions: ["https://www.tiktok.com/*"]`;
+**Host permission `https://www.instagram.com/*`** (baru di 0.2.0)
+
+```
+Pantaw also works on Instagram profile pages. Its content scripts run on www.instagram.com to read the profile follower count and recent post stats (likes, comments, reel views) from the GraphQL responses the profile page itself requests while the user browses, and to display the same results card. It makes no network requests of its own, does not scroll or click automatically, never reads cookies, messages or account data, and discards everything except those numbers.
+```
+
+Cocok dengan kode: `manifest.json` hanya `permissions: ["storage"]` + `host_permissions: ["https://www.tiktok.com/*", "https://www.instagram.com/*"]`;
 `src/main-world.ts` hanya membungkus `fetch`/`XMLHttpRequest` halaman untuk membaca salinan respons, tidak memanggil
 URL baru; `chrome.storage.local` hanya key `columns` (`src/content.ts`).
 
@@ -193,12 +215,17 @@ karena sudah menjelaskan data apa yang dibaca dan bahwa semuanya tetap di browse
 - [x] I do not use or transfer user data to determine creditworthiness or for lending purposes.
 
 **Privacy policy URL:** `https://anditriana.github.io/pantaw/privacy.html`
-(isinya sudah mencakup: hanya `tiktok.com`, data hanya di memori tab, `chrome.storage.local` untuk pengaturan kolom,
+(isinya sudah mencakup: hanya `tiktok.com` + `instagram.com` (0.2.0), data hanya di memori tab, `chrome.storage.local` untuk pengaturan kolom,
 clipboard hanya ditulis saat klik, link Request fitur tanpa data, tanpa remote code, tidak berafiliasi TikTok.)
 
 ---
 
 ## 3. Aset grafis
+
+> **TO DO 0.2.0 — belum dibuat ulang:** semua aset di bawah masih menampilkan/menyebut TikTok saja. Perlu: screenshot
+> kartu di profil Instagram (grid + tab Reels), judul screenshot "TikTok & Instagram", promo tile (cek teks), video promo
+> ID + EN (hook menyebut TikTok saja), landing `docs/index.html` (hero/FAQ TikTok saja). Rilis 0.2.0 tetap bisa
+> diupload dengan aset lama, tapi listing Public sebaiknya menunggu aset baru.
 
 | Aset | Ukuran | Wajib? | Status | File |
 |---|---|---|---|---|
@@ -267,24 +294,34 @@ Kata "TikTok" sengaja tidak dipakai di tile.
 
 ---
 
-## 4. Catatan untuk reviewer (Test instructions) — 702 karakter
+## 4. Catatan untuk reviewer (Test instructions)
 
-Isi di tab **Test instructions** (tidak perlu akun uji):
+Isi di tab **Test instructions**. TikTok tanpa akun; Instagram mewajibkan login, jadi reviewer memakai akun IG mereka
+sendiri (jangan berikan akun cadangan user kecuali diputuskan lain).
 
 ```
-No login or test account is needed.
-
+TikTok (no login needed):
 1. Install the extension.
-2. Open any public TikTok profile in a normal tab, e.g. https://www.tiktok.com/@tiktok (logging in to TikTok is not required).
-3. Wait for the profile and its video grid to load. A small "Pantaw · @username" card appears in the bottom-right corner with followers, average views/likes/comments/shares and three engagement-rate values from the 12 most recent non-pinned videos.
+2. Open any public TikTok profile, e.g. https://www.tiktok.com/@tiktok.
+3. A small "Pantaw · @username" card appears in the bottom-right corner with followers, average views/likes/comments/shares and three engagement-rate values from the 12 most recent non-pinned videos.
 4. Click "Salin data" (Copy data) and paste into a spreadsheet: one tab-separated row. Click ⚙ to reorder/hide columns.
 
-If the card shows "Menunggu data video…" (waiting for video data), scroll the video grid slightly or reload the page. The UI is in Indonesian.
+Instagram (Instagram itself requires being logged in; any account works):
+5. Open a public profile, e.g. https://www.instagram.com/natgeo/. The card shows followers, average likes/comments and ER by followers from the 12 most recent non-pinned posts; views show "–" with the hint "Buka tab Reels untuk views" (open the Reels tab for views).
+6. Click the profile's Reels tab: average views and ER by views fill in from the 12 most recent reels. Shares are not available on Instagram and stay empty.
+
+If the card shows "Menunggu data…" (waiting for data), scroll the grid slightly or reload the page. The UI is in Indonesian.
 ```
 
 ---
 
 ## 5. Checklist submit
+
+Checklist di bawah ditulis untuk submit pertama 0.1.0. Untuk **0.2.0**: `npm test && npm run typecheck` → `npm run zip`
+(→ `release/pantaw-0.2.0.zip`, harus lebih tinggi dari zip 0.1.0 yang tersimpan) → dashboard item yang sama → Package →
+Upload new package → perbarui deskripsi ID + EN (bagian 1), single purpose + justifikasi host Instagram (bagian 2),
+test instructions (bagian 4) → submit. Host baru memunculkan peringatan izin: pemasang 0.1.0 dinonaktifkan sampai
+menyetujui. Pastikan `privacy.html` versi 0.2.0 sudah tayang di Pages sebelum submit.
 
 - [ ] GitHub Pages aktif; `https://anditriana.github.io/pantaw/` dan `.../privacy.html` bisa dibuka (bukan 404).
 - [ ] Daftar Developer Dashboard (biaya sekali ±USD 5), verifikasi email kontak developer.

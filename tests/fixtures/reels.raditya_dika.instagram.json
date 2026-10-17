@@ -1,0 +1,344 @@
+{
+ "data": {
+  "fetch__XDTUserDict": {
+   "id": "25980770",
+   "clips_connection": {
+    "edges": [
+     {
+      "node": {
+       "media": {
+        "pk": "4008520087469763759",
+        "id": "4008520087469763759_25980770",
+        "code": "DehH8gQpyyv",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 26890,
+        "comment_count": 282,
+        "play_count": 604524,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "44520056589",
+          "username": "ikhsanqthi"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4008289269333700574",
+        "id": "4008289269333700574_25980770",
+        "code": "DegTdqHpS_e",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 18934,
+        "comment_count": 72,
+        "play_count": 343781,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "5670501821",
+          "username": "rolansihombing_"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4006724855145077429",
+        "id": "4006724855145077429_25980770",
+        "code": "Deavwb3ppq1",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 42843,
+        "comment_count": 459,
+        "play_count": 530606,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": []
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4005400082565750262",
+        "id": "4005400082565750262_25980770",
+        "code": "DeWCidQpt32",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 11289,
+        "comment_count": 57,
+        "play_count": 266522,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "36560412",
+          "username": "yorissebastian"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4004866411303750498",
+        "id": "4004866411303750498_25980770",
+        "code": "DeUJMhKp0ti",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 11376,
+        "comment_count": 78,
+        "play_count": 329363,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "3442139631",
+          "username": "bibit.id"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4004092826121254449",
+        "id": "4004092826121254449_25980770",
+        "code": "DeRZTX0pbYx",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 64542,
+        "comment_count": 456,
+        "play_count": 1140048,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "38707518712",
+          "username": "syr.records"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4003402867794059760",
+        "id": "4003402867794059760_25980770",
+        "code": "DeO8bKDpSHw",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 2523,
+        "comment_count": 23,
+        "play_count": 116686,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "30972780362",
+          "username": "marvelherorush.id"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4003270638006801238",
+        "id": "4003270638006801238_25980770",
+        "code": "DeOeW9eJZNW",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 9184,
+        "comment_count": 33,
+        "play_count": 257694,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "2054920923",
+          "username": "kotakband_"
+         },
+         {
+          "pk": "6492884",
+          "username": "tantrisyalindri"
+         },
+         {
+          "pk": "286057826",
+          "username": "cellanadalam"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4002543739974634139",
+        "id": "4002543739974634139_25980770",
+        "code": "DeL5FM7Jsqb",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 24022,
+        "comment_count": 91,
+        "play_count": 576498,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "1969742956",
+          "username": "yonobakrie"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4001916518947647870",
+        "id": "4001916518947647870_25980770",
+        "code": "DeJqd70pHF-",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 35831,
+        "comment_count": 154,
+        "play_count": 1042458,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "59535836835",
+          "username": "dr.amirshidik.spm"
+         },
+         {
+          "pk": "45734761325",
+          "username": "makanlurrrr"
+         }
+        ]
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4001030569961069043",
+        "id": "4001030569961069043_25980770",
+        "code": "DeGhBriAhnz",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 9958,
+        "comment_count": 318,
+        "play_count": 416334,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": []
+       }
+      }
+     },
+     {
+      "node": {
+       "media": {
+        "pk": "4001000236150566234",
+        "id": "4001000236150566234_25980770",
+        "code": "DeGaIQ-Ai1a",
+        "media_type": 2,
+        "product_type": "clips",
+        "like_count": 2498,
+        "comment_count": 62,
+        "play_count": 190451,
+        "view_count": null,
+        "like_and_view_counts_disabled": false,
+        "clips_tab_pinned_user_ids": [],
+        "user": {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        },
+        "coauthor_producers": [
+         {
+          "pk": "9274001",
+          "username": "rezaditya17"
+         },
+         {
+          "pk": "1591087892",
+          "username": "savedrap"
+         }
+        ]
+       }
+      }
+     }
+    ],
+    "page_info": {
+     "has_next_page": true
+    }
+   }
+  }
+ }
+}

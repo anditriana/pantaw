@@ -1,10 +1,12 @@
 // Content script (isolated world). Mengumpulkan data dari JSON hidrasi + respons yang
-// diteruskan main-world.ts, lalu menampilkan kartu ER di halaman profil.
+// diteruskan main-world.ts, lalu menampilkan kartu ER di halaman profil TikTok / Instagram.
 import { COLUMN_BY_ID, moveColumn, normalizeConfig, toggleColumn, type ColumnConfig } from './lib/columns';
 import { SOURCE_CONTENT, SOURCE_MAIN, type ApiMessage } from './lib/messages';
-import { SAMPLE_SIZE, computeMetrics, selectRecentVideos } from './lib/metrics';
+import { sampleNote } from './lib/format';
+import { computeMetrics, selectRecentVideos, withViewsFrom } from './lib/metrics';
 import { parseItemList, parseUniversalData, parseUserDetail, type Profile, type Video } from './lib/parse';
-import { profileFromPath } from './lib/route';
+import { parseOgDescription, type IgData } from './lib/parse-instagram';
+import { igProfileFromPath, platformFromHost, profileFromPath } from './lib/route';
 import { sheetHeader, sheetRow } from './lib/sheet';
 import { CARD_CSS } from './card-css';
 
@@ -14,19 +16,26 @@ const FEATURE_REQUEST_URL =
 
 const key = (uniqueId: string) => uniqueId.toLowerCase();
 
-const profiles = new Map<string, Profile>(); // dari hidrasi / user/detail (angka presisi)
-const fallbackProfiles = new Map<string, Profile>(); // dari authorStats di item_list
-const videos = new Map<string, Map<string, Video>>();
+const platform = platformFromHost(location.hostname) ?? 'tiktok';
+
+/** Username profil yang sedang dibuka, null bila bukan halaman profil. */
+const routeUser = (): string | null =>
+  platform === 'instagram' ? (igProfileFromPath(location.pathname)?.username ?? null) : profileFromPath(location.pathname);
+
+const profiles = new Map<string, Profile>(); // dari hidrasi / user/detail / IG data.user (angka presisi)
+const fallbackProfiles = new Map<string, Profile>(); // dari authorStats di item_list / og:description IG (dibulatkan)
+const videos = new Map<string, Map<string, Video>>(); // TikTok: video; IG: post grid (tanpa views)
+const reels = new Map<string, Map<string, Video>>(); // IG: reels dari tab Reels (dengan views)
 
 function addProfile(p: Profile | null) {
   if (p) profiles.set(key(p.uniqueId), p);
 }
 
-function addVideos(list: Video[]) {
+function addVideos(list: Video[], into = videos) {
   for (const v of list) {
     const k = key(v.authorId);
-    if (!videos.has(k)) videos.set(k, new Map());
-    videos.get(k)!.set(v.id, v);
+    if (!into.has(k)) into.set(k, new Map());
+    into.get(k)!.set(v.id, v);
   }
 }
 
@@ -39,12 +48,18 @@ window.addEventListener('message', (e) => {
     if (author) fallbackProfiles.set(key(author.uniqueId), author);
   } else if (msg.kind === 'user_detail') {
     addProfile(parseUserDetail(msg.data));
+  } else if (msg.kind === 'instagram') {
+    const d = msg.data as IgData;
+    d.profiles.forEach(addProfile);
+    addVideos(d.posts);
+    addVideos(d.reels, reels);
   }
   render();
 });
 window.postMessage({ source: SOURCE_CONTENT, kind: 'hello' }, location.origin);
 
 function readHydration() {
+  if (platform === 'instagram') return readOgDescription();
   const el = document.getElementById('__UNIVERSAL_DATA_FOR_REHYDRATION__');
   if (!el?.textContent) return;
   try {
@@ -52,6 +67,14 @@ function readHydration() {
   } catch {
     // format berubah → andalkan item_list / user/detail
   }
+}
+
+// IG: followers cadangan (dibulatkan) dari meta og:description, hanya bila username-nya cocok dengan profil yang dibuka.
+function readOgDescription() {
+  const uid = routeUser();
+  const og = document.querySelector('meta[property="og:description"]')?.getAttribute('content');
+  const p = uid && og ? parseOgDescription(og, uid) : null;
+  if (p) fallbackProfiles.set(key(p.uniqueId), p);
 }
 
 // ---- Kartu (shadow DOM supaya CSS TikTok dan CSS kartu tidak saling bocor) ----
@@ -97,13 +120,18 @@ try {
 }
 
 function currentData() {
-  const uid = profileFromPath(location.pathname);
-  if (!uid) return { uid, profile: undefined, m: null };
+  const uid = routeUser();
+  if (!uid) return { uid, profile: undefined, m: null, fromReels: false };
   const k = key(uid);
   const profile = profiles.get(k) ?? fallbackProfiles.get(k);
   const sample = selectRecentVideos([...(videos.get(k)?.values() ?? [])]);
-  const m = profile ? computeMetrics(profile.followers, sample) : null;
-  return { uid, profile, m };
+  const reelSample = selectRecentVideos([...(reels.get(k)?.values() ?? [])]);
+  if (!profile) return { uid, profile, m: null, fromReels: false };
+  // IG: grid tanpa views → views & ER views dari reels tab Reels; bila grid belum dimuat (buka langsung /reels/), pakai reels saja.
+  const fromReels = sample.length === 0 && reelSample.length > 0;
+  const base = computeMetrics(profile.followers, fromReels ? reelSample : sample);
+  const m = base && !fromReels ? withViewsFrom(base, computeMetrics(profile.followers, reelSample)) : base;
+  return { uid, profile, m, fromReels };
 }
 
 async function copyAction(action: string) {
@@ -136,7 +164,7 @@ function ensureHost(): ShadowRoot {
       // Klik tanpa aksi (mis. teks <label>) jangan render: innerHTML yang diganti memutus label dari checkbox-nya.
       if (!action) return;
       if (action === 'toggle') collapsed = !collapsed;
-      if (action === 'close') dismissedFor = profileFromPath(location.pathname);
+      if (action === 'close') dismissedFor = routeUser();
       const id = (e.target as HTMLElement).closest('[data-id]')?.getAttribute('data-id') ?? '';
       if (action === 'settings') settingsOpen = !settingsOpen;
       if (action === 'settings-done') settingsOpen = false;
@@ -161,10 +189,10 @@ const esc = (s: string) =>
 
 function render() {
   if (!document.body) return;
-  const uid = profileFromPath(location.pathname);
+  const uid = routeUser();
   if (!uid || dismissedFor === uid) return removeHost();
 
-  const { m } = currentData();
+  const { m, fromReels } = currentData();
 
   const label = (action: string, text: string) =>
     copyFeedback?.action === action ? (copyFeedback.ok ? 'Tersalin ✓' : 'Gagal menyalin') : text;
@@ -192,7 +220,10 @@ function render() {
       `<div class="actions"><button class="copy" data-action="settings-done">Selesai</button>` +
       `<button class="link" data-action="settings-reset">Kembalikan default</button></div>`;
   } else if (!m) {
-    body = `<p class="muted">Menunggu data video… Bila tidak muncul, scroll daftar video sedikit atau muat ulang halaman.</p>`;
+    body =
+      platform === 'instagram'
+        ? `<p class="muted">Menunggu data post… Bila tidak muncul, scroll grid post sedikit atau muat ulang halaman.</p>`
+        : `<p class="muted">Menunggu data video… Bila tidak muncul, scroll daftar video sedikit atau muat ulang halaman.</p>`;
   } else {
     body =
       config
@@ -200,7 +231,7 @@ function render() {
         .filter((d) => d.card && config.find((c) => c.id === d.id)!.enabled)
         .map((d) => row(d.card!.label, d.card!.value(m), d.card!.er))
         .join('') +
-      `<p class="muted">${m.sampleSize} video terakhir${m.sampleSize < SAMPLE_SIZE ? ` (kurang dari ${SAMPLE_SIZE})` : ''}, pinned dikecualikan.</p>` +
+      `<p class="muted">${sampleNote(m, platform, fromReels)}</p>` +
       `<div class="actions"><button class="copy" data-action="copy-row"${none ? ' disabled' : ''}>${copyLabel('copy-row', 'Salin data')}</button>` +
       `<button class="link" data-action="copy-header"${none ? ' disabled' : ''}>${copyLabel('copy-header', 'Salin judul kolom')}</button></div>` +
       `<div class="foot"><a href="${FEATURE_REQUEST_URL}" target="_blank" rel="noopener noreferrer">Request fitur</a></div>`;
@@ -215,12 +246,13 @@ function render() {
     `<div class="body">${body}</div></div>`;
 }
 
-// ---- Navigasi SPA: TikTok berganti profil lewat history API tanpa reload ----
+// ---- Navigasi SPA: TikTok/IG berganti profil lewat history API tanpa reload ----
 
 let lastPath = '';
 function onTick() {
   if (location.pathname === lastPath) return;
   lastPath = location.pathname;
+  if (platform === 'instagram') readOgDescription();
   render();
 }
 
