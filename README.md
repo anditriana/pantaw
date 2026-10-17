@@ -3,6 +3,8 @@
 **Pantaw – KOL ER Checker** (merek dipilih user 2026-10-16; "for TikTok" dibuang di 0.2.0, 2026-10-17). Chrome extension (Manifest V3) analitik KOL: cek engagement rate kreator langsung di halaman profil.
 Referensi produk: justkol.id. 0.1.0: **TikTok** (tanpa login). 0.2.0: + **Instagram** (memakai sesi login IG user sendiri).
 
+Cara pasang versi beta dari file zip (sebelum listing Chrome Web Store tayang): [INSTALL.md](INSTALL.md).
+
 Prinsip:
 - Jalan hanya saat user membuka profil; semua hitungan lokal di browser; tanpa server/database terpusat.
 - Tanpa request jaringan sendiri; host permission hanya `https://www.tiktok.com/*` + `https://www.instagram.com/*` (wajib, keputusan user 2026-10-17); satu-satunya permission tambahan `storage` (disetujui user 2026-10-15, untuk pengaturan kolom).
