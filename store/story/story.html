@@ -1,5 +1,6 @@
 <!doctype html>
-<!-- Gambar promo vertikal untuk IG Story & WA Story (1080×1920) dan carousel feed Instagram (?format=feed, 1080×1350).
+<!-- Gambar promo vertikal untuk IG Story & WA Story (1080×1920), carousel feed Instagram (?format=feed, 1080×1350),
+     dan video Reels (?format=reels, 1080×1920, dianimasikan window.seek(t) — dirender store/story/reels.mjs).
      Dirender oleh store/story/render.mjs (Chrome headless): ?s=1|2|3 memilih slide; ?guide=1 menampilkan zona
      yang harus kosong untuk pengecekan — story: safe zone 250 px atas / 340 px bawah (teks/elemen penting di
      antara y=250 dan y=1580); feed: margin 80 px di semua tepi. Screenshot = Chrome asli dari
@@ -39,6 +40,8 @@
   .ctx img { position: absolute; left: 0; top: -225px; width: 920px; height: 691px; opacity: .55; }
   .zoom { position: absolute; right: 0; top: 120px; width: 600px; height: 733px; border-radius: 30px;
           box-shadow: 0 0 0 4px #FE2C55, 0 30px 90px rgba(254, 44, 85, .5); }
+  .zoom img { display: block; width: 100%; height: 100%; border-radius: 30px; }
+  .zoom .cover, .zoom .erbox { display: none; }
   .chips { position: absolute; left: 0; top: 490px; width: 300px; display: grid; gap: 14px; }
   .chips div { font-size: 36px; font-weight: 700; background: rgba(255, 255, 255, .08); border-left: 8px solid #25F4EE;
                border-radius: 14px; padding: 12px 22px; }
@@ -87,6 +90,26 @@
   .feed .cta { margin-top: 40px; }
   .feed .soon { margin-top: 40px; }
 
+  /* ?format=reels — 1080×1920 video, kelas feed + reels (gaya feed, area aman Reels: kosong 250 px atas,
+     400 px bawah untuk caption & tombol IG, 140 px kanan untuk ikon like/komentar). Semua slide tampil; opacity &
+     transform tiap elemen diatur seek(t) di bawah. */
+  body.reels { height: 1920px; }
+  .reels .slide { display: flex; top: 290px; bottom: 440px; right: 160px; }
+  .reels h1 em { display: inline-block; }
+  .reels .steps li { font-size: 40px; }
+  .reels #s2 h1 { font-size: 64px; }
+  .reels .ctx { width: 840px; }
+  .reels .zoom { top: 60px; width: 560px; height: 684px; transform-origin: 100% 0; }
+  .reels .chips { width: 250px; }
+  .reels .note { font-size: 24px; }
+  .reels .zoom .cover { display: block; position: absolute; left: 41px; top: 103px; width: 497px; background: #fff; border-radius: 0 0 14px 14px; }
+  .reels .zoom .erbox { display: block; position: absolute; left: 60px; top: 335px; width: 465px; height: 162px; box-sizing: border-box;
+                        border: 5px solid #25F4EE; border-radius: 14px; box-shadow: 0 0 26px rgba(37, 244, 238, .8); }
+  .reels .trust li { font-size: 38px; }
+  .reels .soon { font-size: 34px; }
+  .reels .cta { font-size: 46px; padding: 22px 48px; }
+  .reels .guide.frame { border-width: 250px 140px 400px 0; }
+
   /* ?guide=1 */
   .guide { position: absolute; left: 0; right: 0; background: rgba(255, 0, 0, .35); outline: 2px dashed #f00; display: none; }
   .guide.top { top: 0; height: 250px; } .guide.bot { bottom: 0; height: 340px; }
@@ -114,7 +137,7 @@
   <h1>Kartu ER muncul <em>langsung</em> di profil TikTok</h1>
   <div class="stage">
     <div class="ctx"><img src="../../docs/img/card.jpg" alt=""></div>
-    <img class="zoom" src="../../docs/img/card-zoom.png" alt="">
+    <div class="zoom"><img src="../../docs/img/card-zoom.png" alt=""><div class="cover"></div><div class="erbox"></div></div>
     <div class="chips"><div>Views</div><div>Likes</div><div>Komentar</div><div class="er">ER</div></div>
     <div class="note">Contoh · @tiktok</div>
   </div>
@@ -143,4 +166,72 @@
   document.getElementById('s' + (q.get('s') || '1')).classList.add('on');
   if (q.get('format') === 'feed') document.body.classList.add('feed');
   if (q.get('guide')) document.body.classList.add('g');
+
+  // --- Reels: timeline deterministik, tanpa animasi/transition CSS (store/story/reels.mjs memanggil seek per frame).
+  // Waktu cue di sini = waktu cue efek suara di reels.mjs.
+  if (q.get('format') === 'reels') {
+    document.body.classList.add('feed', 'reels');
+    const $ = (sel) => document.querySelector(sel), $$ = (sel) => [...document.querySelectorAll(sel)];
+    const S = [0, 7.6, 15.4], DUR = 23, OUT = 0.5;      // awal slide 1/2/3, durasi total, lama transisi keluar
+    const clamp = (x) => Math.max(0, Math.min(1, x));
+    const ease = (x) => 1 - (1 - x) ** 3;
+    const back = (x) => 1 + 2.2 * (x - 1) ** 3 + 1.2 * (x - 1) ** 2; // sedikit lewat lalu kembali (pop)
+    // masuk: fade + geser (dx, dy) + skala s0 → 1, mulai t0 selama d detik
+    function enter(el, t, t0, { dx = 0, dy = 40, s0 = 1, d = 0.5, pop = false } = {}) {
+      const p = clamp((t - t0) / d), e = pop ? back(p) : ease(p);
+      el.style.opacity = clamp(p * 1.6);
+      el.style.transform = `translate(${(1 - e) * dx}px, ${(1 - e) * dy}px) scale(${s0 + (1 - s0) * e})`;
+    }
+    const slides = [$('#s1'), $('#s2'), $('#s3')];
+    const steps = $$('#s1 .steps li'), chips = $$('#s2 .chips div'), trust = $$('#s3 .trust li');
+    const zoom = $('#s2 .zoom'), cover = $('#s2 .cover'), erbox = $('#s2 .erbox'), cta = $('#s3 .cta');
+
+    window.seek = (t) => {
+      slides.forEach((el, i) => {
+        const end = S[i + 1] ?? Infinity, p = ease(clamp((t - (end - OUT)) / OUT));
+        el.style.visibility = t >= S[i] && t < end ? 'visible' : 'hidden';
+        el.style.opacity = 1 - p;
+        el.style.transform = `translateY(${-70 * p}px)`;
+      });
+      // 1 — hook
+      let a = S[0];
+      enter($('#s1 .kicker'), t, a + 0.15);
+      enter($('#s1 h1'), t, a + 0.4, { dy: 60 });
+      enter($('#s1 h1 em'), t, a + 1.0, { dy: 0, s0: 0.5, d: 0.45, pop: true });
+      steps.forEach((el, i) => enter(el, t, a + 1.5 + i * 0.7, { dx: -70, dy: 0 }));
+      enter($('#s1 .pain'), t, a + 4.5, { dy: 30, s0: 0.92, pop: true });
+      enter($('#s1 .brand'), t, a + 0.2, { dy: 20 });
+      // 2 — solusi: kartu zoom dari pojok kanan, baris metrik terbuka berurutan, ER disorot
+      a = S[1];
+      enter($('#s2 .kicker'), t, a + 0.15);
+      enter($('#s2 h1'), t, a + 0.35, { dy: 60 });
+      enter($('#s2 .ctx'), t, a + 0.9, { dy: 40 });
+      enter(zoom, t, a + 1.6, { dx: 60, dy: -30, s0: 0.45, d: 0.8 });
+      const rv = ease(clamp((t - a - 2.5) / 1.6));      // penutup putih turun → baris metrik terbuka dari atas
+      cover.style.top = `${103 + 560 * rv}px`; cover.style.height = `${560 * (1 - rv)}px`;
+      chips.forEach((el, i) => enter(el, t, a + 2.6 + i * 0.4, { dx: -50, dy: 0 }));
+      const er = clamp((t - a - 4.3) / 0.3);
+      erbox.style.opacity = er * (0.75 + 0.25 * Math.cos(Math.max(0, t - a - 4.6) * Math.PI * 2 / 1.4));
+      enter($('#s2 .note'), t, a + 4.6, { dy: 20 });
+      enter($('#s2 .brand'), t, a + 0.2, { dy: 20 });
+      // 3 — CTA: tombol berdenyut
+      a = S[2];
+      enter($('#s3 .logo'), t, a + 0.15, { dy: 0, s0: 0.4, d: 0.55, pop: true });
+      enter($('#s3 .name'), t, a + 0.45, { dy: 50 });
+      enter($('#s3 .tag'), t, a + 0.7, { dy: 40 });
+      trust.forEach((el, i) => enter(el, t, a + 1.1 + i * 0.3, { dx: -60, dy: 0 }));
+      enter($('#s3 .soon'), t, a + 2.3, { dy: 0, s0: 0.8, pop: true });
+      enter(cta, t, a + 2.8, { dy: 0, s0: 0.7, d: 0.5, pop: true });
+      if (t >= a + 3.4) {
+        const k = (1 - Math.cos((t - a - 3.4) * Math.PI * 2 / 1.3)) / 2; // 0..1, periode 1,3 dtk
+        cta.style.transform = `scale(${1 + 0.05 * k})`;
+        cta.style.boxShadow = `0 20px ${60 + 40 * k}px rgba(227, 23, 63, ${0.45 + 0.35 * k})`;
+      }
+      enter($('#s3 .sub'), t, a + 3.2, { dy: 20 });
+      enter($('#s3 .fine'), t, a + 3.4, { dy: 0 });
+    };
+    window.thumb = () => seek(S[2] - OUT - 0.4);         // cover = slide 2 lengkap (kartu + ER tersorot)
+    seek(0);
+    addEventListener('load', () => { window.ready = DUR; });
+  }
 </script>
