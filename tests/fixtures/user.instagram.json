@@ -1,0 +1,38 @@
+[
+ {
+  "data": {
+   "user": {
+    "pk": "25980770",
+    "id": "25980770",
+    "username": "raditya_dika",
+    "full_name": "Raditya Dika",
+    "is_private": false,
+    "follower_count": 21808091
+   }
+  }
+ },
+ {
+  "data": {
+   "user": {
+    "pk": "787132",
+    "id": "787132",
+    "username": "natgeo",
+    "full_name": "National Geographic",
+    "is_private": false,
+    "follower_count": 268357727
+   }
+  }
+ },
+ {
+  "data": {
+   "user": {
+    "pk": "174788501",
+    "id": "174788501",
+    "username": "tasyafarasya",
+    "full_name": "Tasya Farasya",
+    "is_private": false,
+    "follower_count": 7353432
+   }
+  }
+ }
+]

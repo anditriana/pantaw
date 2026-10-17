@@ -1,0 +1,532 @@
+[
+ {
+  "data": {
+   "xdt_api__v1__feed__user_timeline_graphql_connection": {
+    "edges": [
+     {
+      "node": {
+       "pk": "4006792491537650495",
+       "id": "4006792491537650495_174788501",
+       "code": "Dea_IrKzdM_",
+       "taken_at": 1791866935,
+       "media_type": 1,
+       "product_type": "feed",
+       "like_count": 26674,
+       "comment_count": 56,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [
+        "174788501",
+        "8370493143"
+       ],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "8370493143",
+         "username": "mop.beauty"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4008923967294521433",
+       "id": "4008923967294521433_174788501",
+       "code": "DeijxuqI8BZ",
+       "taken_at": 1792120999,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 10599,
+       "comment_count": 58,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "1414549397",
+         "username": "mothercareindo"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4008422401374367563",
+       "id": "4008422401374367563_174788501",
+       "code": "Degxu-_oy9L",
+       "taken_at": 1792061208,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 15759,
+       "comment_count": 89,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4007056593329789586",
+       "id": "4007056593329789586_174788501",
+       "code": "Deb7L3ITxqS",
+       "taken_at": 1791898451,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 8948,
+       "comment_count": 120,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4006317477508132622",
+       "id": "4006317477508132622_174788501",
+       "code": "DeZTIT4T68O",
+       "taken_at": 1791810416,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 33920,
+       "comment_count": 440,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4004089396622261580",
+       "id": "4004089396622261580_174788501",
+       "code": "DeRYhd2k_1M",
+       "taken_at": 1791544674,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 14688,
+       "comment_count": 54,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4004095663944236298",
+       "id": "4004095663944236298_174788501",
+       "code": "DeRZ8qwE_0K",
+       "taken_at": 1791545421,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 8123,
+       "comment_count": 23,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "2247235950",
+         "username": "irene.umar"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3998825518220669647",
+       "id": "3998825518220669647_174788501",
+       "code": "Dd-rp9ET3LP",
+       "taken_at": 1790917357,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 7236,
+       "comment_count": 72,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4005623869352385691",
+       "id": "4005623869352385691_174788501",
+       "code": "DeW1a-8kxyb",
+       "taken_at": 1791727597,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 15485,
+       "comment_count": 59,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4004648795278654235",
+       "id": "4004648795278654235_174788501",
+       "code": "DeTXtycx7sb",
+       "taken_at": 1791611388,
+       "media_type": 1,
+       "product_type": "feed",
+       "like_count": 40442,
+       "comment_count": 124,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4002631849205805910",
+       "id": "4002631849205805910_174788501",
+       "code": "DeMNHXCk7NW",
+       "taken_at": 1791370920,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 15489,
+       "comment_count": 98,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4002583246189834291",
+       "id": "4002583246189834291_174788501",
+       "code": "DeMCEF9EzAz",
+       "taken_at": 1791365126,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 48204,
+       "comment_count": 198,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "233034675",
+         "username": "ala_instyle"
+        }
+       ]
+      }
+     }
+    ],
+    "page_info": {
+     "has_next_page": true
+    }
+   }
+  }
+ },
+ {
+  "data": {
+   "xdt_api__v1__feed__user_timeline_graphql_connection": {
+    "edges": [
+     {
+      "node": {
+       "pk": "4000178203675060166",
+       "id": "4000178203675060166_174788501",
+       "code": "DeDfOHkT-fG",
+       "taken_at": 1791078500,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 4523,
+       "comment_count": 90,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4001947787738226936",
+       "id": "4001947787738226936_174788501",
+       "code": "DeJxk9JzCD4",
+       "taken_at": 1791289450,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 12705,
+       "comment_count": 456,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4001218707409804226",
+       "id": "4001218707409804226_174788501",
+       "code": "DeHLzcLzxvC",
+       "taken_at": 1791202528,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 13053,
+       "comment_count": 197,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4000952929737714509",
+       "id": "4000952929737714509_174788501",
+       "code": "DeGPX3cEytN",
+       "taken_at": 1791170778,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 135749,
+       "comment_count": 1390,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3999541853892624200",
+       "id": "3999541853892624200_174788501",
+       "code": "DeBOiApk79I",
+       "taken_at": 1791002564,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 13974,
+       "comment_count": 137,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3998284959219671261",
+       "id": "3998284959219671261_174788501",
+       "code": "Dd8wvyRE2Dd",
+       "taken_at": 1790852731,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 7704,
+       "comment_count": 85,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3999040523914216458",
+       "id": "3999040523914216458_174788501",
+       "code": "Dd_cisuTIQK",
+       "taken_at": 1790942852,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 74492,
+       "comment_count": 893,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3998173766979092772",
+       "id": "3998173766979092772_174788501",
+       "code": "Dd8XdubEwEk",
+       "taken_at": 1790839476,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 19034,
+       "comment_count": 94,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "47241702116",
+         "username": "tasyafarasyadump"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3997618006938996628",
+       "id": "3997618006938996628_174788501",
+       "code": "Dd6ZGWjTc-U",
+       "taken_at": 1790773275,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 47514,
+       "comment_count": 347,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3997579831260989121",
+       "id": "3997579831260989121_174788501",
+       "code": "Dd6Qa0rk8bB",
+       "taken_at": 1790768673,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 39221,
+       "comment_count": 147,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3996908421228238297",
+       "id": "3996908421228238297_174788501",
+       "code": "Dd33whXE5XZ",
+       "taken_at": 1790688635,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 20517,
+       "comment_count": 107,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3994471833042083814",
+       "id": "3994471833042083814_174788501",
+       "code": "DdvNvfxxt_m",
+       "taken_at": 1790398228,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 2107,
+       "comment_count": 21,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "174788501",
+        "username": "tasyafarasya"
+       },
+       "coauthor_producers": []
+      }
+     }
+    ],
+    "page_info": {
+     "has_next_page": true
+    }
+   }
+  }
+ }
+]

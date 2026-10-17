@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Pantaw – KOL ER Checker for TikTok",
+    "message": "Pantaw – KOL ER Checker",
     "description": "Extension name (manifest name), max 75 characters."
   },
   "appShortName": {
@@ -8,7 +8,7 @@
     "description": "Short name (manifest short_name), max 12 characters."
   },
   "appDescription": {
-    "message": "Check TikTok creators' engagement rate (ER) right on their profile: average views, likes, comments. Calculated locally, no server.",
+    "message": "Check TikTok & Instagram creators' engagement rate (ER) right on their profile: avg views, likes, comments. Calculated locally.",
     "description": "Chrome Web Store summary (manifest description), max 132 characters."
   }
 }

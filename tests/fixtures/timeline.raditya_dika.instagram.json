@@ -1,0 +1,627 @@
+[
+ {
+  "data": {
+   "xdt_api__v1__feed__user_timeline_graphql_connection": {
+    "edges": [
+     {
+      "node": {
+       "pk": "3992339884160944230",
+       "id": "3992339884160944230_25980770",
+       "code": "Ddno_jqCYhm",
+       "taken_at": 1790144022,
+       "media_type": 8,
+       "product_type": "carousel_container",
+       "like_count": 33402,
+       "comment_count": 180,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [
+        "25980770"
+       ],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4008520087469763759",
+       "id": "4008520087469763759_25980770",
+       "code": "DehH8gQpyyv",
+       "taken_at": 1792072940,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 26888,
+       "comment_count": 282,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "44520056589",
+         "username": "ikhsanqthi"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4008289269333700574",
+       "id": "4008289269333700574_25980770",
+       "code": "DegTdqHpS_e",
+       "taken_at": 1792045562,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 18933,
+       "comment_count": 72,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "5670501821",
+         "username": "rolansihombing_"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4006724855145077429",
+       "id": "4006724855145077429_25980770",
+       "code": "Deavwb3ppq1",
+       "taken_at": 1791858920,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 42841,
+       "comment_count": 459,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "4005400082565750262",
+       "id": "4005400082565750262_25980770",
+       "code": "DeWCidQpt32",
+       "taken_at": 1791701158,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 11288,
+       "comment_count": 57,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "36560412",
+         "username": "yorissebastian"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4004866411303750498",
+       "id": "4004866411303750498_25980770",
+       "code": "DeUJMhKp0ti",
+       "taken_at": 1791638183,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 11376,
+       "comment_count": 78,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "3442139631",
+         "username": "bibit.id"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4004092826121254449",
+       "id": "4004092826121254449_25980770",
+       "code": "DeRZTX0pbYx",
+       "taken_at": 1791545190,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 64542,
+       "comment_count": 456,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "38707518712",
+         "username": "syr.records"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4003402867794059760",
+       "id": "4003402867794059760_25980770",
+       "code": "DeO8bKDpSHw",
+       "taken_at": 1791462935,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 2523,
+       "comment_count": 23,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "30972780362",
+         "username": "marvelherorush.id"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4003270638006801238",
+       "id": "4003270638006801238_25980770",
+       "code": "DeOeW9eJZNW",
+       "taken_at": 1791447747,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 9184,
+       "comment_count": 33,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "2054920923",
+         "username": "kotakband_"
+        },
+        {
+         "pk": "6492884",
+         "username": "tantrisyalindri"
+        },
+        {
+         "pk": "286057826",
+         "username": "cellanadalam"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4002543739974634139",
+       "id": "4002543739974634139_25980770",
+       "code": "DeL5FM7Jsqb",
+       "taken_at": 1791363782,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 24021,
+       "comment_count": 91,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "1969742956",
+         "username": "yonobakrie"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4001916518947647870",
+       "id": "4001916518947647870_25980770",
+       "code": "DeJqd70pHF-",
+       "taken_at": 1791285785,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 35831,
+       "comment_count": 154,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "59535836835",
+         "username": "dr.amirshidik.spm"
+        },
+        {
+         "pk": "45734761325",
+         "username": "makanlurrrr"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4001030569961069043",
+       "id": "4001030569961069043_25980770",
+       "code": "DeGhBriAhnz",
+       "taken_at": 1791180006,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 9958,
+       "comment_count": 318,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": []
+      }
+     }
+    ],
+    "page_info": {
+     "has_next_page": true
+    }
+   }
+  }
+ },
+ {
+  "data": {
+   "xdt_api__v1__feed__user_timeline_graphql_connection": {
+    "edges": [
+     {
+      "node": {
+       "pk": "4001000236150566234",
+       "id": "4001000236150566234_25980770",
+       "code": "DeGaIQ-Ai1a",
+       "taken_at": 1791176408,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 2498,
+       "comment_count": 62,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "9274001",
+         "username": "rezaditya17"
+        },
+        {
+         "pk": "1591087892",
+         "username": "savedrap"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4000926829356830779",
+       "id": "4000926829356830779_25980770",
+       "code": "DeGJcDkJNA7",
+       "taken_at": 1791167736,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 6119,
+       "comment_count": 61,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "3563359236",
+         "username": "le_mineraleid"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "4000202363484154099",
+       "id": "4000202363484154099_25980770",
+       "code": "DeDktsJJqjz",
+       "taken_at": 1791081349,
+       "media_type": 1,
+       "product_type": "feed",
+       "like_count": 94148,
+       "comment_count": 909,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3999684669737626357",
+       "id": "3999684669737626357_3442139631",
+       "code": "DeBvAQRSWr1",
+       "taken_at": 1791019723,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 1696,
+       "comment_count": 12,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "3442139631",
+        "username": "bibit.id"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "25980770",
+         "username": "raditya_dika"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3999593005872289446",
+       "id": "3999593005872289446_25980770",
+       "code": "DeBaKXpJ5am",
+       "taken_at": 1791008753,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 87239,
+       "comment_count": 1526,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "925678045",
+         "username": "ahmadrisyad"
+        },
+        {
+         "pk": "304866157",
+         "username": "andersonnicoo"
+        },
+        {
+         "pk": "46646734191",
+         "username": "risyadandson"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3999037197172017319",
+       "id": "3999037197172017319_25980770",
+       "code": "Dd_bySdAwin",
+       "taken_at": 1790942405,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 27617,
+       "comment_count": 554,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "3022508377",
+         "username": "philipslightingid"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3998984226226899350",
+       "id": "3998984226226899350_25980770",
+       "code": "Dd_PvdapQmW",
+       "taken_at": 1790936184,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 15759,
+       "comment_count": 54,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "37976127",
+         "username": "ridwanhr"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3998318960673497935",
+       "id": "3998318960673497935_25980770",
+       "code": "Dd84eklpyNP",
+       "taken_at": 1790856849,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 2138,
+       "comment_count": 18,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "30972780362",
+         "username": "marvelherorush.id"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3998278775642511985",
+       "id": "3998278775642511985_25980770",
+       "code": "Dd8vVzXJ9px",
+       "taken_at": 1790852249,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 6571,
+       "comment_count": 92,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "75043499904",
+         "username": "youandmilk.official"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3997587953361747797",
+       "id": "3997587953361747797_25980770",
+       "code": "Dd6SRA-gf9V",
+       "taken_at": 1790769605,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 2896,
+       "comment_count": 61,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [
+        "47376238133"
+       ],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "47376238133",
+         "username": "colab.asia"
+        }
+       ]
+      }
+     },
+     {
+      "node": {
+       "pk": "3997550441580991215",
+       "id": "3997550441580991215_25980770",
+       "code": "Dd6JvJaJBLv",
+       "taken_at": 1790765216,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 12989,
+       "comment_count": 72,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": []
+      }
+     },
+     {
+      "node": {
+       "pk": "3996843569177875054",
+       "id": "3996843569177875054_25980770",
+       "code": "Dd3pAzLptJu",
+       "taken_at": 1790680963,
+       "media_type": 2,
+       "product_type": "clips",
+       "like_count": 7744,
+       "comment_count": 70,
+       "view_count": null,
+       "like_and_view_counts_disabled": false,
+       "timeline_pinned_user_ids": [],
+       "user": {
+        "pk": "25980770",
+        "username": "raditya_dika"
+       },
+       "coauthor_producers": [
+        {
+         "pk": "2815651216",
+         "username": "pandji.pragiwaksono"
+        }
+       ]
+      }
+     }
+    ],
+    "page_info": {
+     "has_next_page": true
+    }
+   }
+  }
+ }
+]

@@ -12,7 +12,7 @@ export interface ColumnDef {
   card?: { label: string; value: (m: Metrics) => string; er?: boolean };
 }
 
-const int = (n: number) => String(Math.round(n));
+const int = (n: number | null) => (n === null ? '' : String(Math.round(n)));
 const pct = (n: number | null) => (n === null ? '' : (Math.round(n * 100) / 100).toFixed(2).replace('.', ','));
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -26,10 +26,10 @@ export const COLUMNS: ColumnDef[] = [
   { id: 'avgShares', label: 'Rata-rata share', sheet: (_p, m) => int(m.avgShares), card: { label: 'Rata-rata share', value: (m) => formatCount(m.avgShares) } },
   { id: 'erFollowers', label: 'ER followers (%)', sheet: (_p, m) => pct(m.erFollowers), card: { label: 'ER (followers)', value: (m) => formatPercent(m.erFollowers), er: true } },
   { id: 'erViews', label: 'ER views total (%)', sheet: (_p, m) => pct(m.erViews), card: { label: 'ER views (total)', value: (m) => formatPercent(m.erViews), er: true } },
-  { id: 'erViewsAvg', label: 'ER views rata-rata (%)', sheet: (_p, m) => pct(m.erViewsAvg), card: { label: 'ER views (rata-rata/video)', value: (m) => formatPercent(m.erViewsAvg), er: true } },
-  { id: 'jumlahVideo', label: 'Jumlah video', sheet: (_p, m) => String(m.sampleSize) },
+  { id: 'erViewsAvg', label: 'ER views rata-rata (%)', sheet: (_p, m) => pct(m.erViewsAvg), card: { label: 'ER views (rata-rata/post)', value: (m) => formatPercent(m.erViewsAvg), er: true } },
+  { id: 'jumlahVideo', label: 'Jumlah post', sheet: (_p, m) => String(m.sampleSize) },
   { id: 'tanggal', label: 'Tanggal', sheet: (_p, _m, d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` },
-  { id: 'link', label: 'Link profil', sheet: (p) => `https://www.tiktok.com/@${p.uniqueId}` },
+  { id: 'link', label: 'Link profil', sheet: (p) => (p.platform === 'instagram' ? `https://www.instagram.com/${p.uniqueId}/` : `https://www.tiktok.com/@${p.uniqueId}`) },
 ];
 
 export const COLUMN_BY_ID = new Map(COLUMNS.map((c) => [c.id, c]));

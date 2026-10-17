@@ -1,11 +1,11 @@
 # Pantaw
 
-**Pantaw – KOL ER Checker for TikTok** (merek dipilih user 2026-10-16). Chrome extension (Manifest V3) analitik KOL: cek engagement rate kreator langsung di halaman profil.
-Referensi produk: justkol.id. MVP: **TikTok saja** (tanpa login). Instagram menyusul.
+**Pantaw – KOL ER Checker** (merek dipilih user 2026-10-16; "for TikTok" dibuang di 0.2.0, 2026-10-17). Chrome extension (Manifest V3) analitik KOL: cek engagement rate kreator langsung di halaman profil.
+Referensi produk: justkol.id. 0.1.0: **TikTok** (tanpa login). 0.2.0: + **Instagram** (memakai sesi login IG user sendiri).
 
 Prinsip:
 - Jalan hanya saat user membuka profil; semua hitungan lokal di browser; tanpa server/database terpusat.
-- Panggilan jaringan minimal; host permission hanya `https://www.tiktok.com/*`; satu-satunya permission tambahan `storage` (disetujui user 2026-10-15, untuk pengaturan kolom).
+- Tanpa request jaringan sendiri; host permission hanya `https://www.tiktok.com/*` + `https://www.instagram.com/*` (wajib, keputusan user 2026-10-17); satu-satunya permission tambahan `storage` (disetujui user 2026-10-15, untuk pengaturan kolom).
 - Tanpa remote code (aturan MV3 / Chrome Web Store).
 - Gratis penuh; versi berbayar (KOL Manager / spreadsheet) belakangan.
 
@@ -25,8 +25,9 @@ npm run zip        # build + zip isi dist/ → release/pantaw-<version>.zip (unt
 1. `npm run build`
 2. Buka `chrome://extensions`, nyalakan **Developer mode** (kanan atas).
 3. Klik **Load unpacked**, pilih folder `dist/`.
-4. Buka profil TikTok, mis. `https://www.tiktok.com/@tiktok` → kartu ER muncul di kanan bawah.
-5. Setelah `npm run build` ulang, klik ikon reload pada kartu extension lalu muat ulang tab TikTok.
+4. Buka profil TikTok, mis. `https://www.tiktok.com/@tiktok`, atau profil Instagram (login), mis.
+   `https://www.instagram.com/natgeo/` → kartu ER muncul di kanan bawah. Views IG terisi setelah tab **Reels** profil dibuka.
+5. Setelah `npm run build` ulang, klik ikon reload pada kartu extension lalu muat ulang tab TikTok/Instagram.
 
 ### Paket rilis (Chrome Web Store)
 
@@ -46,7 +47,15 @@ Ikon: sumber `assets/icon.svg`; PNG 16/32/48/128 dibuat ke `dist/icons/` saat bu
 - `src/content.ts` (isolated world): baca JSON hidrasi `#__UNIVERSAL_DATA_FOR_REHYDRATION__`
   (`webapp.user-detail.userInfo.statsV2.followerCount`), gabungkan dengan video, render kartu (shadow DOM,
   posisi fixed — tidak mengubah layout TikTok). Pindah profil via SPA dideteksi dari perubahan `location.pathname`.
-- `src/lib/` modul murni: `parse.ts` (bentuk data TikTok), `metrics.ts` (rumus), `route.ts`, `format.ts`.
+- Instagram: `main-world.ts` membaca teks respons `/api/graphql` & `/graphql/query` yang diminta halaman, menyaring dari
+  **bentuk JSON** (doc_id berubah-ubah) dengan `parseInstagramBody`, dan hanya meneruskan angka hasil parse. Profil dari
+  `data.user.follower_count` (cadangan `og:description`, dibulatkan); grid dari
+  `data.xdt_api__v1__feed__user_timeline_graphql_connection` (likes/komentar, **tanpa views**); views reels (`play_count`)
+  hanya dari `clips_connection` di tab `/<user>/reels/`. Pinned = id akun ada di `timeline_pinned_user_ids` /
+  `clips_tab_pinned_user_ids` (kolaborator bisa mem-pin post yang sama di profilnya); post collab dihitung untuk pemilik
+  dan kolaborator (tampil di grid keduanya).
+- `src/lib/` modul murni: `parse.ts` (TikTok + model `Post`), `parse-instagram.ts`, `metrics.ts` (rumus, toleran nilai
+  kosong), `route.ts` (path profil per platform), `format.ts`, `columns.ts`, `sheet.ts`.
 
 ## TO DO
 
@@ -70,5 +79,8 @@ Ikon: sumber `assets/icon.svg`; PNG 16/32/48/128 dibuat ke `dist/icons/` saat bu
     - [x] Video promo YouTube untuk listing (ID + EN, visual sama) — `store/video/`: komposisi `promo.html` (1920×1080, 42 dtk, footage = screenshot Chrome asli di `footage/`, tabel tempel berlabel contoh) dirender per frame lewat Chrome headless/CDP + ffmpeg oleh `render.mjs` (tanpa Remotion/dependensi npm), efek suara UI sintetis tanpa musik oleh `sfx.mjs` (puncak -6 dBFS, musik ditambah user di YouTube Studio); output `release/video/` (tidak di-commit). Diupload Unlisted: ID https://youtu.be/OPiShxayCyk, EN https://youtu.be/EWtBLgPVNeE — detail & cara render ulang di `store/listing.md` bagian 3
     - [ ] (user) Daftar Developer Dashboard (sekali bayar ±USD 5), upload, submit — mulai **Unlisted** untuk tes
     - Alur update: naikkan `version` → build → zip → Package → Upload new package → submit review; Chrome pemakai update otomatis. Permission baru yang memunculkan peringatan menonaktifkan extension sampai pemakai menyetujui (`storage` tidak). Tidak ada rollback: rilis ulang versi lama dengan nomor lebih tinggi.
+- [x] (0.2.0) Instagram — kode: deteksi platform + path profil IG (`/<user>/`, `/<user>/reels/`, `/<user>/tagged/`; tolak `/p/` `/reel/` `/explore/` `/stories/` `/accounts/` `/direct/` dll.), `src/lib/parse-instagram.ts`, model `Post` (views/likes/share boleh kosong), rumus toleran kosong, kartu per platform, label netral ("Jumlah post", "ER views (rata-rata/post)" — juga untuk TikTok, keputusan user 2026-10-17), link profil per platform, manifest host + content_scripts IG, `version` 0.2.0, nama "Pantaw – KOL ER Checker" (keputusan user 2026-10-17). Rumus IG: ER followers dari 12 post grid terbaru (semua tipe, pinned dikecualikan); views & ER views hanya reels dari tab Reels (tanpa share); foto/carousel views kosong; share kosong; likes disembunyikan dikeluarkan dari rata-rata/ER + keterangan "x post likes disembunyikan" (semua → ER kosong). Fixture bersih dari respons asli 2026-10-17 (`tests/fixtures/*.instagram.json`, hanya field yang dipakai parser). Dicek di Chrome (profil terpisah, akun IG cadangan, 2026-10-17): raditya_dika, natgeo, tasyafarasya + tab Reels, navigasi SPA grid→Reels, `/p/` & `/explore/` tanpa kartu, TikTok @tiktok tetap normal. **Belum diverifikasi data asli:** likes disembunyikan (`like_and_view_counts_disabled`, baru kasus sisipan di tes — belum ada profil contoh, keputusan user 2026-10-17 dibiarkan), profil privat, followers cadangan `og:description` (hanya format bahasa Inggris), body multi-baris / `for (;;);` (tidak muncul di rekaman). Catatan: di muatan pertama grid hanya 12 item termasuk pinned → kartu bisa "11/9 post (kurang dari 12)" sampai grid digulir
+- [x] (0.2.0) Privacy policy + listing untuk Instagram — `docs/privacy.html` (host IG, sesi login tidak dibaca, tidak berafiliasi Meta) dan `store/listing.md` (nama/summary baru, deskripsi ID+EN, single purpose, justifikasi host `instagram.com`, test instructions IG, alur submit 0.2.0) sudah ditulis; belum dicek user
+- [ ] (0.2.0) Buat ulang aset untuk Instagram: screenshot store (kartu di profil IG + tab Reels), promo tile (cek teks), video promo ID + EN, landing `docs/index.html` (hero/fitur/FAQ masih TikTok saja) — butuh screenshot dari Chrome user; lalu upload 0.2.0 (`npm run zip`) dan ubah listing ke Public
 - [ ] (0.1.x) Terjemahkan teks UI kartu & panel ⚙ ke English via `chrome.i18n` + `_locales/en/messages.json` — `_locales/` (id default + en) sudah ada sejak 0.1.0 tetapi hanya untuk `name`/`short_name`/`description` manifest (listing Chrome Web Store dua bahasa, keputusan user 2026-10-16); UI kartu masih bahasa Indonesia di semua locale. Label kolom TSV (`src/lib/columns.ts`) ikut diputuskan: diterjemahkan atau tetap
 - [x] Remote git — repo publik https://github.com/anditriana/pantaw (`origin`), `main` ter-push 2026-10-16; riwayat dibersihkan (email author = noreply GitHub)

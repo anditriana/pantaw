@@ -1,6 +1,6 @@
 {
   "appName": {
-    "message": "Pantaw – KOL ER Checker for TikTok",
+    "message": "Pantaw – KOL ER Checker",
     "description": "Nama extension (manifest name), maks 75 karakter."
   },
   "appShortName": {
@@ -8,7 +8,7 @@
     "description": "Nama pendek (manifest short_name), maks 12 karakter."
   },
   "appDescription": {
-    "message": "Cek engagement rate (ER) kreator TikTok langsung di halaman profil: rata-rata views, likes, komentar. Dihitung lokal, tanpa server.",
+    "message": "Cek engagement rate (ER) kreator TikTok & Instagram di profil: rata-rata views, likes, komentar. Dihitung lokal, tanpa server.",
     "description": "Summary di Chrome Web Store (manifest description), maks 132 karakter."
   }
 }

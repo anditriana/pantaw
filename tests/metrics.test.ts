@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import itemList from './fixtures/item_list.tiktok.json';
-import { computeMetrics, selectRecentVideos } from '../src/lib/metrics';
+import { computeMetrics, selectRecentVideos, withViewsFrom } from '../src/lib/metrics';
 import { parseItemList, type Video } from '../src/lib/parse';
 
 const v = (id: string, createTime: number, s: Partial<Video> = {}): Video => ({
@@ -65,5 +65,57 @@ describe('computeMetrics', () => {
     expect(m.erFollowers).toBeCloseTo(((113411 + 23472) / 12 / 96199454) * 100, 10);
     expect(m.erViews).toBeCloseTo(((113411 + 23472 + 7916) / 4810900) * 100, 10);
     expect(m.erViewsAvg).toBeCloseTo(3.21474160930007, 10); // dihitung terpisah dari fixture
+  });
+});
+
+describe('computeMetrics — nilai tidak tersedia (IG)', () => {
+  it('likes disembunyikan dikeluarkan dari rata-rata & ER, dihitung di hiddenLikes', () => {
+    const m = computeMetrics(1000, [
+      v('1', 1, { views: null, likes: 80, comments: 20, shares: null }),
+      v('2', 2, { views: null, likes: null, comments: 500, shares: null }),
+    ])!;
+    expect(m.sampleSize).toBe(2);
+    expect(m.hiddenLikes).toBe(1);
+    expect(m.avgLikes).toBe(80);
+    expect(m.avgComments).toBe(20);
+    expect(m.erFollowers).toBeCloseTo(10);
+    expect(m.avgViews).toBeNull();
+    expect(m.avgShares).toBeNull();
+    expect(m.erViews).toBeNull();
+    expect(m.viewsSampleSize).toBe(0);
+  });
+
+  it('semua likes disembunyikan → ER kosong', () => {
+    const m = computeMetrics(1000, [v('1', 1, { likes: null, views: null }), v('2', 2, { likes: null, views: null })])!;
+    expect(m.hiddenLikes).toBe(2);
+    expect(m.avgLikes).toBeNull();
+    expect(m.erFollowers).toBeNull();
+  });
+
+  it('views hanya dari post yang punya views; share null dihitung 0 di ER views', () => {
+    const m = computeMetrics(1000, [
+      v('1', 1, { views: 1000, likes: 40, comments: 10, shares: null }), // 5%
+      v('2', 2, { views: null, likes: 100, comments: 0, shares: null }), // foto: hanya ER followers
+    ])!;
+    expect(m.viewsSampleSize).toBe(1);
+    expect(m.avgViews).toBe(1000);
+    expect(m.erViews).toBeCloseTo(5);
+    expect(m.erViewsAvg).toBeCloseTo(5);
+    expect(m.erFollowers).toBeCloseTo(7.5);
+  });
+
+  it('TikTok: hiddenLikes 0, viewsSampleSize = jumlah video', () => {
+    const m = computeMetrics(10, [v('1', 1, { views: 5 }), v('2', 2)])!;
+    expect(m.hiddenLikes).toBe(0);
+    expect(m.viewsSampleSize).toBe(2);
+  });
+});
+
+describe('withViewsFrom', () => {
+  it('ganti hanya metrik views; sumber null → tetap', () => {
+    const base = computeMetrics(1000, [v('1', 1, { views: null, likes: 10, comments: 0, shares: null })])!;
+    const reels = computeMetrics(1000, [v('r', 1, { views: 200, likes: 20, comments: 0, shares: null })])!;
+    expect(withViewsFrom(base, null)).toBe(base);
+    expect(withViewsFrom(base, reels)).toEqual({ ...base, viewsSampleSize: 1, avgViews: 200, erViews: 10, erViewsAvg: 10 });
   });
 });
